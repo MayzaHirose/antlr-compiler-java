@@ -1,6 +1,5 @@
 token literal names:
 null
-'Mayza'
 'bool'
 'def'
 'else'
@@ -15,6 +14,35 @@ null
 'var'
 'while'
 'write'
+'('
+')'
+'['
+']'
+'{'
+'}'
+','
+':'
+';'
+'+'
+'-'
+'*'
+'/'
+'%'
+'=='
+'!='
+'>'
+'>='
+'||'
+'&&'
+'!'
+'='
+'+='
+'-='
+'*='
+'/='
+'%='
+'?'
+null
 null
 null
 null
@@ -22,7 +50,6 @@ null
 null
 
 token symbolic names:
-null
 null
 BOOL_KW
 DEF_KW
@@ -38,15 +65,49 @@ STRING_KW
 VAR_KW
 WHILE_KW
 WRITE_KW
+PAREN_OPEN
+PAREN_CLOSE
+BRACKETS_OPEN
+BRACKETS_CLOSE
+CBRACES_OPEN
+CBRACES_CLOSE
+COMMA
+COLON
+SEMICOLON
+PLUS
+MINUS
+TIMES
+DIV
+PERCENT
+EQUAL
+NEQUAL
+GREATER
+GREATER_OR_EQUAL
+OR
+AND
+NOT
+ATTRIB
+ATTRIB_PLUS
+ATTRIB_MINUS
+ATTRIB_TIMES
+ATTRIB_DIV
+ATTRIB_PERCENT
+TERNARY
+IDENTIFIER
 INTEGER
 BOOLEAN
 STRING
-IGNORAR
-COMENTARIOS
+IGNORE
+COMMENT
 
 rule names:
 start
+declaracao
+decVar
+listaSpecVars
+tipo
+decSub
 
 
 atn:
-[3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 22, 9, 4, 2, 9, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 7, 2, 4, 3, 2, 2, 2, 4, 5, 7, 3, 2, 2, 5, 6, 7, 20, 2, 2, 6, 7, 7, 22, 2, 2, 7, 3, 3, 2, 2, 2, 2]
+[3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 50, 36, 4, 2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 4, 7, 9, 7, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 3, 3, 3, 5, 3, 22, 10, 3, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 5, 3, 5, 3, 6, 3, 6, 3, 7, 3, 7, 3, 7, 2, 2, 8, 2, 4, 6, 8, 10, 12, 2, 3, 5, 2, 3, 3, 8, 8, 13, 13, 2, 30, 2, 14, 3, 2, 2, 2, 4, 21, 3, 2, 2, 2, 6, 23, 3, 2, 2, 2, 8, 29, 3, 2, 2, 2, 10, 31, 3, 2, 2, 2, 12, 33, 3, 2, 2, 2, 14, 15, 5, 4, 3, 2, 15, 16, 7, 21, 2, 2, 16, 17, 5, 4, 3, 2, 17, 18, 7, 22, 2, 2, 18, 3, 3, 2, 2, 2, 19, 22, 5, 6, 4, 2, 20, 22, 5, 12, 7, 2, 21, 19, 3, 2, 2, 2, 21, 20, 3, 2, 2, 2, 22, 5, 3, 2, 2, 2, 23, 24, 7, 14, 2, 2, 24, 25, 5, 8, 5, 2, 25, 26, 7, 24, 2, 2, 26, 27, 5, 10, 6, 2, 27, 28, 7, 25, 2, 2, 28, 7, 3, 2, 2, 2, 29, 30, 7, 45, 2, 2, 30, 9, 3, 2, 2, 2, 31, 32, 9, 2, 2, 2, 32, 11, 3, 2, 2, 2, 33, 34, 7, 45, 2, 2, 34, 13, 3, 2, 2, 2, 3, 21]
