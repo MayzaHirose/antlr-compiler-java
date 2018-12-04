@@ -3,11 +3,18 @@ grammar Grace;
  * Parser Rules
  */
  
- start					: declaracao CBRACES_OPEN declaracao CBRACES_CLOSE ;
+ start					: declaracao+ ;
  declaracao				: (decVar | decSub) ;
  decVar					: VAR_KW listaSpecVars COLON tipo SEMICOLON ;
- listaSpecVars			: IDENTIFIER ;
- tipo					: (BOOL_KW | INT_KW | STRING_KW) ;
+ listaSpecVars			: specVar ((COMMA specVar)+)? ;
+ tipo					: (BOOL_KW | INT_KW | STRING_KW | (STRING_KW memoriaReservada)) ;
+ specVar				: (specVarSimples | specVarSimplesIni | specVarArranjo | specVarArranjoIni) ;
+ specVarSimples			: IDENTIFIER ;
+ specVarSimplesIni		: IDENTIFIER ATTRIB (operacaoAritmetica | INTEGER | BOOLEAN | STRING) ;
+ specVarArranjo			: IDENTIFIER memoriaReservada ;
+ specVarArranjoIni		: IDENTIFIER memoriaReservada ATTRIB CBRACES_OPEN (INTEGER | BOOLEAN | STRING) ((COMMA (INTEGER | BOOLEAN | STRING))+)? CBRACES_CLOSE;
+ operacaoAritmetica		: (INTEGER | IDENTIFIER) OP_ARITMETICO (INTEGER | IDENTIFIER) ((OP_ARITMETICO (INTEGER | IDENTIFIER))+)?;
+ memoriaReservada		: BRACKETS_OPEN INTEGER BRACKETS_CLOSE ;
  decSub					: IDENTIFIER ;
  
  /*
@@ -18,8 +25,8 @@ grammar Grace;
  fragment UPPERCASE		: [A-Z]+ ;
  fragment NUMBER		: [0-9] ;
  fragment ASCII         : [\u0000-\u007F];
- fragment ESCAPED_QUOTE : '\\"';
- fragment WHITESPACE	: ' ';
+ fragment ESCAPED_QUOTE : '\\"' ;
+ fragment WHITESPACE	: ' ' ;
  
  BOOL_KW				: 'bool' ;
  DEF_KW					: 'def' ;
@@ -36,6 +43,7 @@ grammar Grace;
  WHILE_KW				: 'while' ;
  WRITE_KW				: 'write' ;
  
+ OP_ARITMETICO 			: (PLUS | MINUS | TIMES | DIV | REMAINDER) ;
  PAREN_OPEN				: '(' ;
  PAREN_CLOSE			: ')' ;
  BRACKETS_OPEN			: '[' ;
@@ -49,7 +57,7 @@ grammar Grace;
  MINUS					: '-' ;
  TIMES					: '*' ;
  DIV					: '/' ;
- PERCENT				: '%' ;
+ REMAINDER				: '%' ;
  EQUAL					: '==' ;
  NEQUAL					: '!=' ;
  GREATER				: '>' ;
@@ -65,10 +73,12 @@ grammar Grace;
  ATTRIB_PERCENT			: '%=' ;
  TERNARY				: '?' ;
  
- IDENTIFIER				: ('_' | LOWERCASE | UPPERCASE) ('_' | LOWERCASE |UPPERCASE | NUMBER)+ ;
  
  INTEGER				: NUMBER+ ;
- BOOLEAN				: ('true' | 'false') ;
- STRING					: '"' (LOWERCASE | UPPERCASE | ESCAPED_QUOTE | WHITESPACE | NUMBER | ASCII)+ '"' ;
+ BOOLEAN				: (TRUE | FALSE) ;
+ TRUE  					: 'true' ;
+ FALSE 					: 'false' ;
+ STRING					: '"' (LOWERCASE | UPPERCASE | ESCAPED_QUOTE | WHITESPACE | NUMBER)+ '"' ;
+ COMMENT				: '//' ~[\r\n]* -> skip ;
  IGNORE 				: [ \t\r\n]+ -> skip ;
- COMMENT				: '//' (LOWERCASE | UPPERCASE | ESCAPED_QUOTE | WHITESPACE | NUMBER | ASCII)+ '\n' -> skip ;
+ IDENTIFIER				: ('_' | LOWERCASE | UPPERCASE) (('_' | LOWERCASE |UPPERCASE | NUMBER)+)? ;

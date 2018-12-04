@@ -57,6 +57,76 @@ public interface GraceListener extends ParseTreeListener {
 	 */
 	void exitTipo(GraceParser.TipoContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GraceParser#specVar}.
+	 * @param ctx the parse tree
+	 */
+	void enterSpecVar(GraceParser.SpecVarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#specVar}.
+	 * @param ctx the parse tree
+	 */
+	void exitSpecVar(GraceParser.SpecVarContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#specVarSimples}.
+	 * @param ctx the parse tree
+	 */
+	void enterSpecVarSimples(GraceParser.SpecVarSimplesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#specVarSimples}.
+	 * @param ctx the parse tree
+	 */
+	void exitSpecVarSimples(GraceParser.SpecVarSimplesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#specVarSimplesIni}.
+	 * @param ctx the parse tree
+	 */
+	void enterSpecVarSimplesIni(GraceParser.SpecVarSimplesIniContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#specVarSimplesIni}.
+	 * @param ctx the parse tree
+	 */
+	void exitSpecVarSimplesIni(GraceParser.SpecVarSimplesIniContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#specVarArranjo}.
+	 * @param ctx the parse tree
+	 */
+	void enterSpecVarArranjo(GraceParser.SpecVarArranjoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#specVarArranjo}.
+	 * @param ctx the parse tree
+	 */
+	void exitSpecVarArranjo(GraceParser.SpecVarArranjoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#specVarArranjoIni}.
+	 * @param ctx the parse tree
+	 */
+	void enterSpecVarArranjoIni(GraceParser.SpecVarArranjoIniContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#specVarArranjoIni}.
+	 * @param ctx the parse tree
+	 */
+	void exitSpecVarArranjoIni(GraceParser.SpecVarArranjoIniContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#operacaoAritmetica}.
+	 * @param ctx the parse tree
+	 */
+	void enterOperacaoAritmetica(GraceParser.OperacaoAritmeticaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#operacaoAritmetica}.
+	 * @param ctx the parse tree
+	 */
+	void exitOperacaoAritmetica(GraceParser.OperacaoAritmeticaContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#memoriaReservada}.
+	 * @param ctx the parse tree
+	 */
+	void enterMemoriaReservada(GraceParser.MemoriaReservadaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#memoriaReservada}.
+	 * @param ctx the parse tree
+	 */
+	void exitMemoriaReservada(GraceParser.MemoriaReservadaContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GraceParser#decSub}.
 	 * @param ctx the parse tree
 	 */

@@ -1,1 +1,8 @@
-var _mayza : bool ; { var _mayza2 : int ; }
+var a, b = 3, c = 2 + b: int;
+var str1, str2 = "String 2": string;
+var i, j = true: bool;
+var x, v[10], z[3] = {1, 5, 8}: int;
+var palavra: string[32]; // memoria reservada para 32 caracteres.
+var texto: string; // memoria reservada para 256 caracteres.
+var nome = "Fulano": string; // memoria reservada para 6 caracteres.
+var titulo = "Meu programa": string[64]; // memoria reservada para 64 caracteres.
