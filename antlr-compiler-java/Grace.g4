@@ -14,33 +14,42 @@ grammar Grace;
  specVarSimplesIni		: IDENTIFIER ATTRIB (operacaoAritmetica | INTEGER | BOOLEAN | STRING) ;
  specVarArranjo			: IDENTIFIER memoriaReservada ;
  specVarArranjoIni		: IDENTIFIER memoriaReservada ATTRIB CBRACES_OPEN (INTEGER | BOOLEAN | STRING) ((COMMA (INTEGER | BOOLEAN | STRING))+)? CBRACES_CLOSE;
- operacaoAritmetica		: (INTEGER | IDENTIFIER) OP_ARITMETICO (INTEGER | IDENTIFIER) ((OP_ARITMETICO (INTEGER | IDENTIFIER))+)?;
+ operacaoAritmetica		: (INTEGER | variavel) OP_ARITMETICO (INTEGER | variavel) ((OP_ARITMETICO (INTEGER | variavel))+)?;
  memoriaReservada		: BRACKETS_OPEN INTEGER? BRACKETS_CLOSE ;
 
  decSub					: (decProc | decFunc) ;
  
- decProc				: DEF_KW IDENTIFIER PAREN_OPEN listaParametros PAREN_CLOSE bloco ;
- decFunc				: DEF_KW IDENTIFIER PAREN_OPEN listaParametros PAREN_CLOSE COLON tipo bloco ;
+ decProc				: DEF_KW IDENTIFIER PAREN_OPEN listaParametros? PAREN_CLOSE bloco ;
+ decFunc				: DEF_KW IDENTIFIER PAREN_OPEN listaParametros? PAREN_CLOSE COLON tipo bloco ;
  
  listaParametros		: specParam ((SEMICOLON specParam)+)? ;
  specParam				: param  ((COMMA param)+)? COLON tipo ;
  param					: (IDENTIFIER | IDENTIFIER BRACKETS_OPEN BRACKETS_CLOSE) ;
  bloco					: CBRACES_OPEN (declaracao+)? (comando+)? CBRACES_CLOSE ;
- comando				: (cmdSimples | cmdBloco) ;
+ comando				: (cmdSimples) ; //| cmdBloco) ;
  
- cmdSimples				: (cmdAtrib | cmdIf | cmdWhile | cmdFor);
+ cmdSimples				: (cmdAtrib | cmdIf | cmdWhile | cmdFor | cmdStop | cmdSkip |cmdReturn | cmdChamadaProc | cmdRead | cmdWrite);
  
  cmdAtrib				: atrib SEMICOLON ;
- atrib					: IDENTIFIER (ATTRIB | ATTRIB_PLUS | ATTRIB_MINUS | OP_ATRIBUICAO) expressao ;
+ atrib					: variavel (ATTRIB | ATTRIB_PLUS | ATTRIB_MINUS | ATTRIB_TIMES | ATTRIB_DIV | ATTRIB_REMAINDER) expressao ;
  cmdIf					: IF_KW PAREN_OPEN expressao PAREN_CLOSE bloco (ELSE_KW bloco)? ;
  cmdWhile				: WHILE_KW PAREN_OPEN expressao PAREN_CLOSE bloco ;
  cmdFor					: FOR_KW PAREN_OPEN atribIni SEMICOLON expressao SEMICOLON atribPasso PAREN_CLOSE bloco ;
  atribIni				: IDENTIFIER ATTRIB INTEGER ;
  atribPasso				: IDENTIFIER (ATTRIB_PLUS | ATTRIB_MINUS) INTEGER ;
+ cmdStop				: STOP_KW SEMICOLON ;
+ cmdSkip				: SKIP_KW SEMICOLON ;
+ cmdReturn				: RETURN_KW expressao? SEMICOLON ;
+ cmdChamadaProc 		: IDENTIFIER PAREN_OPEN listaExpressao? PAREN_CLOSE SEMICOLON ;
+ listaExpressao			: expressao ((COMMA expressao)+)? ;
+ cmdRead				: READ_KW variavel SEMICOLON;
+ cmdWrite				: WRITE_KW expressao ((COMMA expressao)+)? SEMICOLON ;
+ variavel				: (IDENTIFIER | (IDENTIFIER BRACKETS_OPEN expressao BRACKETS_CLOSE)) ;
  
- cmdBloco				: AND ;
+ //cmdBloco				: AND ;
  
- expressao				: AND ;
+ expressao				: (STRING | INTEGER | BOOLEAN | variavel | chamadaFuncao | (PAREN_OPEN expressao PAREN_CLOSE)) ((OP_EXPRESSAO | OP_ARITMETICO) expressao)?;
+ chamadaFuncao			: cmdChamadaProc ;
  
  /*
  * Lexer Rules
@@ -68,7 +77,6 @@ grammar Grace;
  WHILE_KW				: 'while' ;
  WRITE_KW				: 'write' ;
  
- OP_ATRIBUICAO			: (ATTRIB_TIMES | ATTRIB_DIV | ATTRIB_REMAINDER) ;
  OP_ARITMETICO 			: (PLUS | MINUS | TIMES | DIV | REMAINDER) ;
  PAREN_OPEN				: '(' ;
  PAREN_CLOSE			: ')' ;
@@ -89,16 +97,19 @@ grammar Grace;
  TIMES					: '*' ;
  DIV					: '/' ;
  REMAINDER				: '%' ;
+ ATTRIB					: '=' ;
+ 
+ OP_EXPRESSAO			: (EQUAL | NEQUAL | GREATER | GREATER_OR_EQUAL | LESS | LESS_OR_EQUAL | OR | AND | NOT);
  EQUAL					: '==' ;
  NEQUAL					: '!=' ;
  GREATER				: '>' ;
  GREATER_OR_EQUAL		: '>=' ;
+ LESS					: '<' ;
+ LESS_OR_EQUAL			: '<=' ;
  OR						: '||' ;
  AND					: '&&' ;
  NOT					: '!' ;
- ATTRIB					: '=' ;
  TERNARY				: '?' ;
- 
  
  INTEGER				: NUMBER+ ;
  BOOLEAN				: (TRUE | FALSE) ;

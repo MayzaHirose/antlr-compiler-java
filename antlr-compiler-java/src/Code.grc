@@ -13,8 +13,15 @@
 //def func(x[], y: int; z: bool): int {
 //    &&
 //}
+//def funcaoSemParametros(): string {
+//	i = && ;
+//}
+	
+//def procedimentoSemParametros() {
+//	i = && ;
+//}
 
-def adicionar(v[]: int; n: int; x: int) {
+//def adicionar(v[]: int; n: int; x: int) {
 //    var i: int;
 //    def soma(a: int): int {
 //    	i = && ;
@@ -24,16 +31,34 @@ def adicionar(v[]: int; n: int; x: int) {
 //    	i /= && ;
 //    	i %= && ;
 //    }
-    
-    if(&&) {
-    	i = && ;
-    }
-    
-    while(&&) {
-    	i = && ;
-    }
-    
-    for(i = 0;&&;i+=1) {
-    	i = && ;
-    }
-}
+//    
+//    if(&&) {
+//    	i = && ;
+//    } else {
+//    	j = && ;
+//    }
+//    
+//    while(&&) {
+//    	i = && ;
+//    }
+//    
+//    for(i = 0;&&;i+=1) {
+//    	i = && ;
+//    	stop ;
+//    	skip ;
+//    }
+//	def retornoFuncao(): bool {
+//		i = 1;
+//		return 2;
+//	}
+	
+//	def retornoProcedimento() {
+//		i = "minha string";
+//		return;
+//	}
+	
+//	chamadaProcedimento(1,"tring");
+	
+//	read _mayza ;
+//	write _mayza ;
+//}

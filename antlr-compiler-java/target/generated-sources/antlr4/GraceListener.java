@@ -287,15 +287,85 @@ public interface GraceListener extends ParseTreeListener {
 	 */
 	void exitAtribPasso(GraceParser.AtribPassoContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GraceParser#cmdBloco}.
+	 * Enter a parse tree produced by {@link GraceParser#cmdStop}.
 	 * @param ctx the parse tree
 	 */
-	void enterCmdBloco(GraceParser.CmdBlocoContext ctx);
+	void enterCmdStop(GraceParser.CmdStopContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GraceParser#cmdBloco}.
+	 * Exit a parse tree produced by {@link GraceParser#cmdStop}.
 	 * @param ctx the parse tree
 	 */
-	void exitCmdBloco(GraceParser.CmdBlocoContext ctx);
+	void exitCmdStop(GraceParser.CmdStopContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#cmdSkip}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdSkip(GraceParser.CmdSkipContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#cmdSkip}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdSkip(GraceParser.CmdSkipContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#cmdReturn}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdReturn(GraceParser.CmdReturnContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#cmdReturn}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdReturn(GraceParser.CmdReturnContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#cmdChamadaProc}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdChamadaProc(GraceParser.CmdChamadaProcContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#cmdChamadaProc}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdChamadaProc(GraceParser.CmdChamadaProcContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#listaExpressao}.
+	 * @param ctx the parse tree
+	 */
+	void enterListaExpressao(GraceParser.ListaExpressaoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#listaExpressao}.
+	 * @param ctx the parse tree
+	 */
+	void exitListaExpressao(GraceParser.ListaExpressaoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#cmdRead}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdRead(GraceParser.CmdReadContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#cmdRead}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdRead(GraceParser.CmdReadContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#cmdWrite}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdWrite(GraceParser.CmdWriteContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#cmdWrite}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdWrite(GraceParser.CmdWriteContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#variavel}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariavel(GraceParser.VariavelContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#variavel}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariavel(GraceParser.VariavelContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GraceParser#expressao}.
 	 * @param ctx the parse tree
@@ -306,4 +376,14 @@ public interface GraceListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpressao(GraceParser.ExpressaoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#chamadaFuncao}.
+	 * @param ctx the parse tree
+	 */
+	void enterChamadaFuncao(GraceParser.ChamadaFuncaoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#chamadaFuncao}.
+	 * @param ctx the parse tree
+	 */
+	void exitChamadaFuncao(GraceParser.ChamadaFuncaoContext ctx);
 }
