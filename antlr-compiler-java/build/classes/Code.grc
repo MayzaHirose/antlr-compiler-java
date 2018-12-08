@@ -62,3 +62,83 @@
 //	read _mayza ;
 //	write _mayza ;
 //}
+
+//def testandoAtribuicaoExpressao() {
+//	x = i;
+//	x += funcao(x);
+//	x -= "minha string" ;
+//	x *= 199;
+//	x /= true;
+//	x %= STRING + STRING;
+//	x = 1 >= 2;
+//	x = (1+2) >= 2;
+//	x = 1 + 1 + 1;
+//	x = 1 + 1 < 2;
+//	
+//	chamadaProcedimento(1,"tring");
+//}
+
+//def testandoIfExpressao() {
+//	if(true){
+//		x = i;
+//	}
+//	
+//	if(funcao){
+//		x = i;
+//	}
+//	
+//	if(x){
+//		x = i;
+//	}
+//	
+//	if(x <= 2){
+//		x = i;
+//	}
+//	
+//	if((1 == 2) >= 3){
+//		x = i;
+//	}
+//	
+//}
+
+//def testandoWhileExpressao() {
+//	while(true){
+//		x = i;
+//	}
+//	
+//	while(funcao){
+//		x = i;
+//	}
+//	
+//	while(x){
+//		x = i;
+//	}
+//	
+//	while(x <= 2){
+//		x = i;
+//	}
+//	
+//	while((1 == 2) >= 3){
+//		x = i;
+//	}
+//	
+//}
+
+//def testandoWhileExpressao() {
+//	for(i=0;i<=5;i+=1) {
+//	x = i;
+//	}
+//	for(i=0;i<=x;i+=1) {
+//	x = i;
+//	}
+//	for(i=0;i<=funcao;i+=1) {
+//	x = i;
+//	}
+//	for(i=0;i<=1+1;i+=1) {
+//	x = i;
+//	}
+//	for(i=0;i<=(1+1);i+=1) {
+//	x = i;
+//	}
+//
+//}

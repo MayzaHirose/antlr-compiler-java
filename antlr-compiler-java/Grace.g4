@@ -11,10 +11,11 @@ grammar Grace;
  tipo					: (BOOL_KW | INT_KW | STRING_KW) ;
  specVar				: (specVarSimples | specVarSimplesIni | specVarArranjo | specVarArranjoIni) ;
  specVarSimples			: IDENTIFIER ;
- specVarSimplesIni		: IDENTIFIER ATTRIB (operacaoAritmetica | INTEGER | BOOLEAN | STRING) ;
+ specVarSimplesIni		: IDENTIFIER ATTRIB expVarSimplesIni;
  specVarArranjo			: IDENTIFIER memoriaReservada ;
  specVarArranjoIni		: IDENTIFIER memoriaReservada ATTRIB CBRACES_OPEN (INTEGER | BOOLEAN | STRING) ((COMMA (INTEGER | BOOLEAN | STRING))+)? CBRACES_CLOSE;
- operacaoAritmetica		: (INTEGER | variavel) OP_ARITMETICO (INTEGER | variavel) ((OP_ARITMETICO (INTEGER | variavel))+)?;
+ 
+ expVarSimplesIni		: (STRING | INTEGER | BOOLEAN | variavel | (PAREN_OPEN expVarSimplesIni PAREN_CLOSE)) (OP_ARITMETICO expVarSimplesIni)?;
  memoriaReservada		: BRACKETS_OPEN INTEGER? BRACKETS_CLOSE ;
 
  decSub					: (decProc | decFunc) ;
@@ -32,9 +33,9 @@ grammar Grace;
  
  cmdAtrib				: atrib SEMICOLON ;
  atrib					: variavel (ATTRIB | ATTRIB_PLUS | ATTRIB_MINUS | ATTRIB_TIMES | ATTRIB_DIV | ATTRIB_REMAINDER) expressao ;
- cmdIf					: IF_KW PAREN_OPEN expressao PAREN_CLOSE bloco (ELSE_KW bloco)? ;
- cmdWhile				: WHILE_KW PAREN_OPEN expressao PAREN_CLOSE bloco ;
- cmdFor					: FOR_KW PAREN_OPEN atribIni SEMICOLON expressao SEMICOLON atribPasso PAREN_CLOSE bloco ;
+ cmdIf					: IF_KW PAREN_OPEN expressaoIf PAREN_CLOSE bloco (ELSE_KW bloco)? ;
+ cmdWhile				: WHILE_KW PAREN_OPEN expressaoWhile PAREN_CLOSE bloco ;
+ cmdFor					: FOR_KW PAREN_OPEN atribIni SEMICOLON expressaoFor SEMICOLON atribPasso PAREN_CLOSE bloco ;
  atribIni				: IDENTIFIER ATTRIB INTEGER ;
  atribPasso				: IDENTIFIER (ATTRIB_PLUS | ATTRIB_MINUS) INTEGER ;
  cmdStop				: STOP_KW SEMICOLON ;
@@ -49,8 +50,12 @@ grammar Grace;
  //cmdBloco				: AND ;
  
  expressao				: (STRING | INTEGER | BOOLEAN | variavel | chamadaFuncao | (PAREN_OPEN expressao PAREN_CLOSE)) ((OP_EXPRESSAO | OP_ARITMETICO) expressao)?;
- chamadaFuncao			: cmdChamadaProc ;
+ chamadaFuncao			: IDENTIFIER PAREN_OPEN listaExpressao? PAREN_CLOSE ;
  
+ expressaoIf			: (INTEGER | BOOLEAN | variavel | chamadaFuncao | (PAREN_OPEN expressaoIf PAREN_CLOSE)) ((OP_EXPRESSAO) expressaoIf)? ;
+ expressaoWhile			: expressaoIf ;
+ expressaoFor			: variavel OP_EXPRESSAO teste ;
+ teste					: (INTEGER | variavel | chamadaFuncao | (PAREN_OPEN teste PAREN_CLOSE)) (OP_ARITMETICO teste)?;
  /*
  * Lexer Rules
  */

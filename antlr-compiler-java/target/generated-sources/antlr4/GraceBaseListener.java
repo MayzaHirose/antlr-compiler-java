@@ -135,13 +135,13 @@ public class GraceBaseListener implements GraceListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOperacaoAritmetica(GraceParser.OperacaoAritmeticaContext ctx) { }
+	@Override public void enterExpVarSimplesIni(GraceParser.ExpVarSimplesIniContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOperacaoAritmetica(GraceParser.OperacaoAritmeticaContext ctx) { }
+	@Override public void exitExpVarSimplesIni(GraceParser.ExpVarSimplesIniContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -466,6 +466,54 @@ public class GraceBaseListener implements GraceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitChamadaFuncao(GraceParser.ChamadaFuncaoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpressaoIf(GraceParser.ExpressaoIfContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpressaoIf(GraceParser.ExpressaoIfContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpressaoWhile(GraceParser.ExpressaoWhileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpressaoWhile(GraceParser.ExpressaoWhileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpressaoFor(GraceParser.ExpressaoForContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpressaoFor(GraceParser.ExpressaoForContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTeste(GraceParser.TesteContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTeste(GraceParser.TesteContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

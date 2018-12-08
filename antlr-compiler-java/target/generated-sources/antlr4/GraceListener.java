@@ -107,15 +107,15 @@ public interface GraceListener extends ParseTreeListener {
 	 */
 	void exitSpecVarArranjoIni(GraceParser.SpecVarArranjoIniContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GraceParser#operacaoAritmetica}.
+	 * Enter a parse tree produced by {@link GraceParser#expVarSimplesIni}.
 	 * @param ctx the parse tree
 	 */
-	void enterOperacaoAritmetica(GraceParser.OperacaoAritmeticaContext ctx);
+	void enterExpVarSimplesIni(GraceParser.ExpVarSimplesIniContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GraceParser#operacaoAritmetica}.
+	 * Exit a parse tree produced by {@link GraceParser#expVarSimplesIni}.
 	 * @param ctx the parse tree
 	 */
-	void exitOperacaoAritmetica(GraceParser.OperacaoAritmeticaContext ctx);
+	void exitExpVarSimplesIni(GraceParser.ExpVarSimplesIniContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GraceParser#memoriaReservada}.
 	 * @param ctx the parse tree
@@ -386,4 +386,44 @@ public interface GraceListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitChamadaFuncao(GraceParser.ChamadaFuncaoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#expressaoIf}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressaoIf(GraceParser.ExpressaoIfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#expressaoIf}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressaoIf(GraceParser.ExpressaoIfContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#expressaoWhile}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressaoWhile(GraceParser.ExpressaoWhileContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#expressaoWhile}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressaoWhile(GraceParser.ExpressaoWhileContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#expressaoFor}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressaoFor(GraceParser.ExpressaoForContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#expressaoFor}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressaoFor(GraceParser.ExpressaoForContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#teste}.
+	 * @param ctx the parse tree
+	 */
+	void enterTeste(GraceParser.TesteContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#teste}.
+	 * @param ctx the parse tree
+	 */
+	void exitTeste(GraceParser.TesteContext ctx);
 }
