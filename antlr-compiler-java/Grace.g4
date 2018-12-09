@@ -45,7 +45,7 @@ grammar Grace;
  listaExpressao			: expressao ((COMMA expressao)+)? ;
  cmdRead				: READ_KW variavel SEMICOLON;
  cmdWrite				: WRITE_KW expressao ((COMMA expressao)+)? SEMICOLON ;
- variavel				: (IDENTIFIER | (IDENTIFIER BRACKETS_OPEN expressao BRACKETS_CLOSE)) ;
+ variavel				: (IDENTIFIER | (IDENTIFIER BRACKETS_OPEN expressaoVar BRACKETS_CLOSE)) ;
  
  //cmdBloco				: AND ;
  
@@ -54,8 +54,11 @@ grammar Grace;
  
  expressaoIf			: (INTEGER | BOOLEAN | variavel | chamadaFuncao | (PAREN_OPEN expressaoIf PAREN_CLOSE)) ((OP_EXPRESSAO) expressaoIf)? ;
  expressaoWhile			: expressaoIf ;
- expressaoFor			: variavel OP_EXPRESSAO teste ;
- teste					: (INTEGER | variavel | chamadaFuncao | (PAREN_OPEN teste PAREN_CLOSE)) (OP_ARITMETICO teste)?;
+ expressaoFor			: variavel OP_EXPRESSAO expressaoForCond ;
+ expressaoForCond		: (INTEGER | variavel | chamadaFuncao | (PAREN_OPEN expressaoForCond PAREN_CLOSE)) (OP_ARITMETICO expressaoForCond)? ;
+ expressaoVar			: (INTEGER | variavel | chamadaFuncao | (PAREN_OPEN expressaoVar PAREN_CLOSE)) (OP_ARITMETICO expressaoVar)? ;
+ 
+ 
  /*
  * Lexer Rules
  */

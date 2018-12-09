@@ -507,13 +507,25 @@ public class GraceBaseListener implements GraceListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTeste(GraceParser.TesteContext ctx) { }
+	@Override public void enterExpressaoForCond(GraceParser.ExpressaoForCondContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTeste(GraceParser.TesteContext ctx) { }
+	@Override public void exitExpressaoForCond(GraceParser.ExpressaoForCondContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpressaoVar(GraceParser.ExpressaoVarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpressaoVar(GraceParser.ExpressaoVarContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

@@ -417,13 +417,23 @@ public interface GraceListener extends ParseTreeListener {
 	 */
 	void exitExpressaoFor(GraceParser.ExpressaoForContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GraceParser#teste}.
+	 * Enter a parse tree produced by {@link GraceParser#expressaoForCond}.
 	 * @param ctx the parse tree
 	 */
-	void enterTeste(GraceParser.TesteContext ctx);
+	void enterExpressaoForCond(GraceParser.ExpressaoForCondContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GraceParser#teste}.
+	 * Exit a parse tree produced by {@link GraceParser#expressaoForCond}.
 	 * @param ctx the parse tree
 	 */
-	void exitTeste(GraceParser.TesteContext ctx);
+	void exitExpressaoForCond(GraceParser.ExpressaoForCondContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GraceParser#expressaoVar}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressaoVar(GraceParser.ExpressaoVarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#expressaoVar}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressaoVar(GraceParser.ExpressaoVarContext ctx);
 }

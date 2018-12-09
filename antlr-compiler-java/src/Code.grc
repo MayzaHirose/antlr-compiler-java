@@ -124,7 +124,7 @@
 //	
 //}
 
-//def testandoWhileExpressao() {
+//def testandoForExpressao() {
 //	for(i=0;i<=5;i+=1) {
 //	x = i;
 //	}
@@ -140,5 +140,23 @@
 //	for(i=0;i<=(1+1);i+=1) {
 //	x = i;
 //	}
-//
 //}
+
+//def retuChamadaProcEWrite() {
+//	return;
+//	return (1+2) >= 2;
+//	return 1 + 1 + 1;
+//	return 1 + 1 < 2;
+//	
+//	procedimento((1+2) >= 2, 1 + 1 + 1, 1 + 1 < 2);
+//	
+//	write "mayza", x, 1+1, 1+(2-1);
+//}
+
+def expressaoVar() {
+	x = v[1+1];
+	x = v[x+x];
+	x = v[2+x];
+	x = v[funcao];
+	
+}
