@@ -1,10 +1,14 @@
+import compiler.util.TipoDeDado;
+import compiler.util.TipoSimbolo;
 
 public class EntradaTabelaDeSimbolos {
-    private String nome, tipo, tipoDeDado;
+    private String nome;
+    private TipoSimbolo tipoSimbolo; 
+    private TipoDeDado tipoDeDado;
     
-    public EntradaTabelaDeSimbolos(String nome, String tipo, String tipoDeDado) {
+    public EntradaTabelaDeSimbolos(String nome, TipoSimbolo tipoSimbolo, TipoDeDado tipoDeDado) {
         this.nome = nome;
-        this.tipo = tipo;
+        this.tipoSimbolo = tipoSimbolo;
         this.tipoDeDado = tipoDeDado;
     }
     
@@ -12,11 +16,11 @@ public class EntradaTabelaDeSimbolos {
         return nome;
     }
     
-    public String getTipo() {
-        return tipo;
+    public TipoSimbolo getTipoSimbolo() {
+        return tipoSimbolo;
     }
     
-    public String getTipoDeDado(){
+    public TipoDeDado getTipoDeDado(){
         return tipoDeDado;
     }
 }

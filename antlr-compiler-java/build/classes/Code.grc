@@ -152,6 +152,8 @@
 //	
 //	write "mayza", x, 1+1, 1+(2-1);
 //}
+var nome = "Fulano": string; // memoria reservada para 6 caracteres.
+var titulo = "Meu programa": string[64]; // memoria reservada para 64 caracteres.
 
 def expressaoVar() {
 	x = v[1+1];
@@ -159,4 +161,12 @@ def expressaoVar() {
 	x = v[2+x];
 	x = v[funcao];
 	
+}
+
+def main(): int {
+	x = v[1+1];
+	x = v[x+x];
+	x = v[2+x];
+	x = v[funcao];
+	return 0;
 }

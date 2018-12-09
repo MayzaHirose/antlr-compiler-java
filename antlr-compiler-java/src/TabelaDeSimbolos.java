@@ -1,17 +1,20 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import compiler.util.TipoDeDado;
+import compiler.util.TipoSimbolo;
+
 public class TabelaDeSimbolos {
-    private String escopo;
-    private List<EntradaTabelaDeSimbolos> simbolos;
+    private final String escopo;
+    private final List<EntradaTabelaDeSimbolos> simbolos;
     
     public TabelaDeSimbolos(String escopo) {
-        simbolos = new ArrayList<EntradaTabelaDeSimbolos>();
+        simbolos = new ArrayList<>();
         this.escopo = escopo;
     }
     
-    public void adicionarSimbolo(String nome, String tipo, String tipoDeDado) {
-        simbolos.add(new EntradaTabelaDeSimbolos(nome, tipo, tipoDeDado));
+    public void adicionarSimbolo(String nome, TipoSimbolo tipoSimbolo, TipoDeDado tipoDeDado) {
+        simbolos.add(new EntradaTabelaDeSimbolos(nome, tipoSimbolo, tipoDeDado));
     }
     
     public void adicionarSimbolo(EntradaTabelaDeSimbolos simbolo) {

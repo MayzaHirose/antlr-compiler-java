@@ -1,11 +1,13 @@
 import java.util.LinkedList;
 
-// A pilha de tabelas é a pilha de escopos, com cada tabela representando um escopo
+import compiler.util.TipoDeDado;
+
+//A pilha de tabelas é a pilha de escopos, com cada tabela representando um escopo
 public class PilhaDeTabelas {
-    private LinkedList<TabelaDeSimbolos> pilha;
+    private final LinkedList<TabelaDeSimbolos> pilha;
 
     public PilhaDeTabelas() {
-        pilha = new LinkedList<TabelaDeSimbolos>();
+        pilha = new LinkedList<>();
     }
 
     public void empilhar(TabelaDeSimbolos ts) {
@@ -26,17 +28,16 @@ public class PilhaDeTabelas {
     }
 
     public void desempilhar() {
-        TabelaDeSimbolos ret = pilha.pop();
+        pilha.pop();
     }
     
-    public String tipoDeDadoDoSimbolo(String nome){
-        String tipo = null;
+    public TipoDeDado tipoDeDadoDoSimbolo(String nome){
         for(TabelaDeSimbolos ts : pilha){
-            EntradaTabelaDeSimbolos etds = ts.getSimbolo(nome);
-            if(etds != null) {
-                return etds.getTipoDeDado();
+            EntradaTabelaDeSimbolos simbolo = ts.getSimbolo(nome);
+            if(simbolo != null) {
+                return simbolo.getTipoDeDado();
             }
         }
-        return "";
+        return null;
     }
 }
