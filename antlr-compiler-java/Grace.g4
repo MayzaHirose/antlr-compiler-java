@@ -128,3 +128,4 @@ grammar Grace;
  IGNORE 				: [ \t\r\n]+ -> skip ;
  IDENTIFIER				: ('_' | LOWERCASE | UPPERCASE) (('_' | LOWERCASE |UPPERCASE | NUMBER)+)? ;
  
+ ERROR_CHAR : . ;

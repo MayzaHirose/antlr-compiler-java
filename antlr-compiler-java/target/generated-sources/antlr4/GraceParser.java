@@ -24,7 +24,8 @@ public class GraceParser extends Parser {
 		ATTRIB_REMAINDER=29, PLUS=30, MINUS=31, TIMES=32, DIV=33, REMAINDER=34, 
 		ATTRIB=35, OP_EXPRESSAO=36, EQUAL=37, NEQUAL=38, GREATER=39, GREATER_OR_EQUAL=40, 
 		LESS=41, LESS_OR_EQUAL=42, OR=43, AND=44, NOT=45, TERNARY=46, INTEGER=47, 
-		BOOLEAN=48, TRUE=49, FALSE=50, STRING=51, COMMENT=52, IGNORE=53, IDENTIFIER=54;
+		BOOLEAN=48, TRUE=49, FALSE=50, STRING=51, COMMENT=52, IGNORE=53, IDENTIFIER=54, 
+		ERROR_CHAR=55;
 	public static final int
 		RULE_start = 0, RULE_declaracao = 1, RULE_decVar = 2, RULE_listaSpecVars = 3, 
 		RULE_tipo = 4, RULE_specVar = 5, RULE_specVarSimples = 6, RULE_specVarSimplesIni = 7, 
@@ -66,7 +67,7 @@ public class GraceParser extends Parser {
 		"PLUS", "MINUS", "TIMES", "DIV", "REMAINDER", "ATTRIB", "OP_EXPRESSAO", 
 		"EQUAL", "NEQUAL", "GREATER", "GREATER_OR_EQUAL", "LESS", "LESS_OR_EQUAL", 
 		"OR", "AND", "NOT", "TERNARY", "INTEGER", "BOOLEAN", "TRUE", "FALSE", 
-		"STRING", "COMMENT", "IGNORE", "IDENTIFIER"
+		"STRING", "COMMENT", "IGNORE", "IDENTIFIER", "ERROR_CHAR"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -136,6 +137,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitStart(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitStart(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final StartContext start() throws RecognitionException {
@@ -190,6 +196,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitDeclaracao(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitDeclaracao(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -255,6 +266,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitDecVar(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitDecVar(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -326,6 +342,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitListaSpecVars(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitListaSpecVars(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ListaSpecVarsContext listaSpecVars() throws RecognitionException {
@@ -390,6 +411,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitTipo(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitTipo(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final TipoContext tipo() throws RecognitionException {
@@ -446,6 +472,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitSpecVar(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitSpecVar(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -510,6 +541,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitSpecVarSimples(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitSpecVarSimples(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final SpecVarSimplesContext specVarSimples() throws RecognitionException {
@@ -550,6 +586,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitSpecVarSimplesIni(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitSpecVarSimplesIni(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -594,6 +635,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitSpecVarArranjo(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitSpecVarArranjo(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -655,6 +701,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitSpecVarArranjoIni(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitSpecVarArranjoIni(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -758,6 +809,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitExpVarSimplesIni(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitExpVarSimplesIni(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ExpVarSimplesIniContext expVarSimplesIni() throws RecognitionException {
@@ -850,6 +906,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitMemoriaReservada(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitMemoriaReservada(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final MemoriaReservadaContext memoriaReservada() throws RecognitionException {
@@ -904,6 +965,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitDecSub(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitDecSub(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -964,6 +1030,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitDecProc(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitDecProc(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1034,6 +1105,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitDecFunc(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitDecFunc(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final DecFuncContext decFunc() throws RecognitionException {
@@ -1102,6 +1178,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitListaParametros(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitListaParametros(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1178,6 +1259,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitSpecParam(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitSpecParam(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final SpecParamContext specParam() throws RecognitionException {
@@ -1246,6 +1332,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitParam(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitParam(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ParamContext param() throws RecognitionException {
@@ -1313,6 +1404,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitBloco(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitBloco(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1400,6 +1496,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitComando(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitComando(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ComandoContext comando() throws RecognitionException {
@@ -1467,6 +1568,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitCmdSimples(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitCmdSimples(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1570,6 +1676,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitCmdAtrib(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitCmdAtrib(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final CmdAtribContext cmdAtrib() throws RecognitionException {
@@ -1619,6 +1730,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitAtrib(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitAtrib(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1681,6 +1797,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitCmdIf(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitCmdIf(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1748,6 +1869,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitCmdWhile(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitCmdWhile(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final CmdWhileContext cmdWhile() throws RecognitionException {
@@ -1811,6 +1937,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitCmdFor(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitCmdFor(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final CmdForContext cmdFor() throws RecognitionException {
@@ -1866,6 +1997,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitAtribIni(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitAtribIni(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final AtribIniContext atribIni() throws RecognitionException {
@@ -1909,6 +2045,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitAtribPasso(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitAtribPasso(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1961,6 +2102,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitCmdStop(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitCmdStop(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final CmdStopContext cmdStop() throws RecognitionException {
@@ -2000,6 +2146,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitCmdSkip(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitCmdSkip(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2043,6 +2194,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitCmdReturn(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitCmdReturn(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2099,6 +2255,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitCmdChamadaProc(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitCmdChamadaProc(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2162,6 +2323,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitListaExpressao(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitListaExpressao(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2229,6 +2395,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitCmdRead(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitCmdRead(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final CmdReadContext cmdRead() throws RecognitionException {
@@ -2280,6 +2451,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitCmdWrite(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitCmdWrite(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2351,6 +2527,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitVariavel(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitVariavel(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2428,6 +2609,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitExpressao(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitExpressao(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2536,6 +2722,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitChamadaFuncao(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitChamadaFuncao(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ChamadaFuncaoContext chamadaFuncao() throws RecognitionException {
@@ -2603,6 +2794,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitExpressaoIf(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitExpressaoIf(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2696,6 +2892,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitExpressaoWhile(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitExpressaoWhile(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ExpressaoWhileContext expressaoWhile() throws RecognitionException {
@@ -2738,6 +2939,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitExpressaoFor(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitExpressaoFor(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2794,6 +3000,11 @@ public class GraceParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitExpressaoForCond(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitExpressaoForCond(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2892,6 +3103,11 @@ public class GraceParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof GraceListener ) ((GraceListener)listener).exitExpressaoVar(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GraceVisitor ) return ((GraceVisitor<? extends T>)visitor).visitExpressaoVar(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ExpressaoVarContext expressaoVar() throws RecognitionException {
@@ -2961,7 +3177,7 @@ public class GraceParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\38\u019c\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\39\u019c\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
