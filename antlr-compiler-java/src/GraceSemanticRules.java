@@ -12,26 +12,37 @@ public class GraceSemanticRules {
 	}
 	
 	// DECLARAÇÃO
-	public static Boolean verificaVariavelInicializadaComTipoCorreto(String valor, TipoDeDado tipoEsperado) {
+	public static TipoDeDado verificaVariavelInicializadaComTipoCorreto(String valor, TipoDeDado tipoEsperado) {
 		Boolean isTipoCorreto = Boolean.FALSE;
+		TipoDeDado tipoEncontrado = null;
 		
 		switch (tipoEsperado.toString()) {
-		case "INT":
+		case "int":
 			try {
 				Integer.parseInt(valor);
 				isTipoCorreto = Boolean.TRUE;
 			} catch (Exception e) {
+				if(valor.equals("true") || valor.equals("false")) {
+					tipoEncontrado = TipoDeDado.BOOL;
+				} else {
+					tipoEncontrado = TipoDeDado.STRING;
+				}
 				isTipoCorreto = Boolean.FALSE;
 			}		
 			break;
-		case "STRING":
+		case "string":
 			if(valor.startsWith("\"") && valor.endsWith("\"")) {
 				isTipoCorreto = Boolean.TRUE;
 			} else {
+				if(valor.equals("true") || valor.equals("false")) {
+					tipoEncontrado = TipoDeDado.BOOL;
+				} else {
+					tipoEncontrado = TipoDeDado.INT;
+				}
 				isTipoCorreto = Boolean.FALSE;
 			}
 			break;
-		case "BOOL":
+		case "bool":
 			switch (valor) {
 			case "true":
 				isTipoCorreto = Boolean.TRUE;
@@ -40,12 +51,24 @@ public class GraceSemanticRules {
 				isTipoCorreto = Boolean.TRUE;
 				break;
 			default:
+				if(valor.startsWith("\"") && valor.endsWith("\"")) {
+					tipoEncontrado = TipoDeDado.STRING;
+				} else {
+					tipoEncontrado = TipoDeDado.INT;
+				}
 				isTipoCorreto = Boolean.FALSE;
 				break;
 			}
 			break;
 		}
 				
-		return isTipoCorreto;
+		return isTipoCorreto ? tipoEsperado : tipoEncontrado;
+	}
+
+	public static Boolean verificaExisteVariavelMesmoNome(String cadeia, TabelaDeSimbolos tabelaDeSimbolos) {
+		if(tabelaDeSimbolos.existeSimbolo(cadeia)) {
+			return Boolean.TRUE;
+		}
+		return Boolean.FALSE;
 	}
 }
