@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import compiler.util.TipoDeDado;
-import compiler.util.TipoSimbolo;
+import compiler.util.Categoria;
 
 public class TabelaDeSimbolos {
     private final String escopo;
@@ -13,17 +13,21 @@ public class TabelaDeSimbolos {
         this.escopo = escopo;
     }
     
-    public void adicionarSimbolo(String nome, TipoSimbolo tipoSimbolo, TipoDeDado tipoDeDado) {
-        simbolos.add(new EntradaTabelaDeSimbolos(nome, tipoSimbolo, tipoDeDado));
+    public void adicionarSimbolo(String cadeia, Categoria categoria, TipoDeDado tipoDeDado, String valor) {
+        simbolos.add(new EntradaTabelaDeSimbolos(cadeia, categoria, tipoDeDado, valor));
     }
     
     public void adicionarSimbolo(EntradaTabelaDeSimbolos simbolo) {
         simbolos.add(simbolo);
     }
     
-    public boolean existeSimbolo(String nome) {
+    public void atualizarSimbolo() {
+    	
+    }
+    
+    public boolean existeSimbolo(String cadeia) {
         for(EntradaTabelaDeSimbolos etds : simbolos) {
-            if(etds.getNome().equals(nome)) {
+            if(etds.getCadeia().equals(cadeia)) {
                 return true;
             }
         }
@@ -34,9 +38,9 @@ public class TabelaDeSimbolos {
         return escopo;
     }
     
-    public EntradaTabelaDeSimbolos getSimbolo(String nome){
+    public EntradaTabelaDeSimbolos getSimbolo(String cadeia){
          for(EntradaTabelaDeSimbolos etds : simbolos) {
-            if(etds.getNome().equals(nome)) {
+            if(etds.getCadeia().equals(cadeia)) {
                 return etds;
             }
         }

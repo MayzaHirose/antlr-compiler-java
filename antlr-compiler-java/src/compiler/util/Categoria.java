@@ -1,5 +1,5 @@
 package compiler.util;
 
-public enum TipoSimbolo {
+public enum Categoria {
 	VARIAVEL, FUNCAO, PROCEDIMENTO;
 }

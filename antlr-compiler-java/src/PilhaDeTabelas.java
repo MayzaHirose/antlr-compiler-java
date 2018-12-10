@@ -18,9 +18,9 @@ public class PilhaDeTabelas {
         return pilha.peek();
     }
 
-    public boolean existeSimbolo(String nome) {
+    public boolean existeSimbolo(String cadeia) {
         for (TabelaDeSimbolos ts : pilha) {
-            if (ts.existeSimbolo(nome)) {
+            if (ts.existeSimbolo(cadeia)) {
                 return true;
             }
         }
@@ -31,9 +31,9 @@ public class PilhaDeTabelas {
         pilha.pop();
     }
     
-    public TipoDeDado tipoDeDadoDoSimbolo(String nome){
+    public TipoDeDado tipoDeDadoDoSimbolo(String cadeia){
         for(TabelaDeSimbolos ts : pilha){
-            EntradaTabelaDeSimbolos simbolo = ts.getSimbolo(nome);
+            EntradaTabelaDeSimbolos simbolo = ts.getSimbolo(cadeia);
             if(simbolo != null) {
                 return simbolo.getTipoDeDado();
             }

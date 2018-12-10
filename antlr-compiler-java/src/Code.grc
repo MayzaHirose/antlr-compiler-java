@@ -212,4 +212,5 @@
 
 //}
 
-var a: int;
+//ERROS SEMANTICOS
+var a, d=5: bool;
