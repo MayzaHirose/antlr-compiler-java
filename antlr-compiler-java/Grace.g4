@@ -33,11 +33,11 @@ grammar Grace;
  
  cmdAtrib				: atrib SEMICOLON ;
  atrib					: variavel (ATTRIB | ATTRIB_PLUS | ATTRIB_MINUS | ATTRIB_TIMES | ATTRIB_DIV | ATTRIB_REMAINDER) expressao ;
- cmdIf					: IF_KW PAREN_OPEN expressaoIf PAREN_CLOSE bloco (ELSE_KW bloco)? ;
- cmdWhile				: WHILE_KW PAREN_OPEN expressaoWhile PAREN_CLOSE bloco ;
- cmdFor					: FOR_KW PAREN_OPEN atribIni SEMICOLON expressaoFor SEMICOLON atribPasso PAREN_CLOSE bloco ;
- atribIni				: IDENTIFIER ATTRIB INTEGER ;
- atribPasso				: IDENTIFIER (ATTRIB_PLUS | ATTRIB_MINUS) INTEGER ;
+ cmdIf					: IF_KW PAREN_OPEN expressao PAREN_CLOSE bloco (ELSE_KW bloco)? ;
+ cmdWhile				: WHILE_KW PAREN_OPEN expressao PAREN_CLOSE bloco ;
+ cmdFor					: FOR_KW PAREN_OPEN atribIni SEMICOLON expressao SEMICOLON atribPasso PAREN_CLOSE bloco ;
+ atribIni				: atrib;
+ atribPasso				: atrib ;
  cmdStop				: STOP_KW SEMICOLON ;
  cmdSkip				: SKIP_KW SEMICOLON ;
  cmdReturn				: RETURN_KW expressao? SEMICOLON ;
@@ -45,18 +45,18 @@ grammar Grace;
  listaExpressao			: expressao ((COMMA expressao)+)? ;
  cmdRead				: READ_KW variavel SEMICOLON;
  cmdWrite				: WRITE_KW expressao ((COMMA expressao)+)? SEMICOLON ;
- variavel				: (IDENTIFIER | (IDENTIFIER BRACKETS_OPEN expressaoVar BRACKETS_CLOSE)) ;
+ variavel				: (IDENTIFIER | (IDENTIFIER BRACKETS_OPEN expressao BRACKETS_CLOSE)) ;
  
  //cmdBloco				: AND ;
  
  expressao				: (STRING | INTEGER | BOOLEAN | variavel | chamadaFuncao | (PAREN_OPEN expressao PAREN_CLOSE)) ((OP_EXPRESSAO | OP_ARITMETICO) expressao)?;
  chamadaFuncao			: IDENTIFIER PAREN_OPEN listaExpressao? PAREN_CLOSE ;
  
- expressaoIf			: (INTEGER | BOOLEAN | variavel | chamadaFuncao | (PAREN_OPEN expressaoIf PAREN_CLOSE)) ((OP_EXPRESSAO) expressaoIf)? ;
- expressaoWhile			: expressaoIf ;
- expressaoFor			: variavel OP_EXPRESSAO expressaoForCond ;
- expressaoForCond		: (INTEGER | variavel | chamadaFuncao | (PAREN_OPEN expressaoForCond PAREN_CLOSE)) (OP_ARITMETICO expressaoForCond)? ;
- expressaoVar			: (INTEGER | variavel | chamadaFuncao | (PAREN_OPEN expressaoVar PAREN_CLOSE)) (OP_ARITMETICO expressaoVar)? ;
+ //expressaoIf			: (INTEGER | BOOLEAN | variavel | chamadaFuncao | (PAREN_OPEN expressaoIf PAREN_CLOSE)) ((OP_EXPRESSAO) expressaoIf)? ;
+ //expressaoWhile			: expressaoIf ;
+ //expressaoFor			: variavel OP_EXPRESSAO expressaoForCond ;
+ //expressaoForCond		: (INTEGER | variavel | chamadaFuncao | (PAREN_OPEN expressaoForCond PAREN_CLOSE)) (OP_ARITMETICO expressaoForCond)? ;
+ //expressaoVar			: (INTEGER | variavel | chamadaFuncao | (PAREN_OPEN expressaoVar PAREN_CLOSE)) (OP_ARITMETICO expressaoVar)? ;
  
  
  /*

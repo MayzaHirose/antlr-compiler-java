@@ -1,3 +1,6 @@
+// if, while, e outras coisas que utilizam expressao, podem acabar recebendo expresoes invalidasmas que serao tratadas na parte semântica.
+// estava sendo tratado na parte sintática (expressaoIf, expressaoVar, etc) mas segundo a especificação, devem ser tratadas na parte semântica
+
 //var a, b = 3, c = 2 + b: int;
 //var str1, str2 = "String 2": string;
 //var i, j = true: bool;
@@ -8,17 +11,17 @@
 //var titulo = "Meu programa": string[64]; // memoria reservada para 64 caracteres.
 
 //def proc(y: int) {
-//    &&
+//    i = 1 + 1 < 2;
 //}
 //def func(x[], y: int; z: bool): int {
-//    &&
+//    i = 1 + 1 < 2;
 //}
 //def funcaoSemParametros(): string {
-//	i = && ;
+//	i = 1 + 1 < 2;
 //}
 	
 //def procedimentoSemParametros() {
-//	i = && ;
+//	i = 1 + 1 < 2;
 //}
 
 //def adicionar(v[]: int; n: int; x: int) {
@@ -152,21 +155,61 @@
 //	
 //	write "mayza", x, 1+1, 1+(2-1);
 //}
-var nome = "Fulano": string; // memoria reservada para 6 caracteres.
-var titulo = "Meu programa": string[64]; // memoria reservada para 64 caracteres.
+//var nome = "Fulano": string; // memoria reservada para 6 caracteres.
+//var titulo = "Meu programa": string[64]; // memoria reservada para 64 caracteres.
 
-def expressaoVar() {
-	x = v[1+1];
-	x = v[x+x];
-	x = v[2+x];
-	x = v[funcao];
+//def expressaoVar() {
+	//x = v[1+1];
+	//x = v[x+x];
+	//x = v[2+x];
+	//x = v[funcao];
 	
-}
+//}
 
-def main(): int {
-	x = v[1+1];
-	x = v[x+x];
-	x = v[2+x];
-	x = v[funcao];
-	return 0;
-}
+//def main(): int {
+	//x = v[1+1];
+	//x = v[x+x];
+	//x = v[2+x];
+	//x = v[funcao];
+	//return 0;
+//}
+
+//def bubblesort(v[]: int; n: int) {
+  //  var i=0, j: int;
+    //var trocou = true: bool;
+
+//    while (i < n-1 && trocou) {
+  //      trocou = false;
+    //    for (j=0; j<(n-i-1); j+=1) {
+      //      if (v[j] > v[j+1]) {
+        //        var aux = v[j]: int;
+          //      v[j] = v[j+1];
+            //    v[j+1] = aux;
+              //  trocou = true;
+            //}
+        //}
+        //i += 1;
+    //}
+//}
+
+//def main(): int {
+  //  var i: int;
+
+    //write "Digite os valores do arranjo";
+
+    //for (i=0; i<10; i+=1) {
+      //  write "A\" i \" ";
+        //read v[i];
+    //}
+
+    //bubblesort(v, 10);
+
+    //write "Arranjo ordenadoA";
+
+    //for (i=0; i<10; i+=1) {
+      //  write v[i], " ";
+    //}
+
+//}
+
+var a: int;

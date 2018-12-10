@@ -12,7 +12,12 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
         mapRegistros = new HashMap<>();
         mapParametros = new HashMap<String, LinkedList<String>>();
         pilhaDeTabelas.empilhar(new TabelaDeSimbolos("global"));
-        for(int i = 0;i < ctx.declaracao().size();i++) {
+        Integer qtdDeclaracoes = ctx.declaracao().size();
+        for(int i = 0;i < qtdDeclaracoes;i++) {
+        	if(i+1 == qtdDeclaracoes) {
+        		GraceSemanticRules.verificaSePossuiFuncaoMain();
+        		GraceSemanticRules.verificaSeFuncaoMainEstaNoFinal();
+        	}
         	visitDeclaracao(ctx.declaracao(i));
         }
 		return "";
@@ -20,12 +25,10 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
     
 	@Override 
 	public String visitDeclaracao(GraceParser.DeclaracaoContext ctx) { 
-		System.out.println("DECLARACAO");
 		return visitChildren(ctx); 
 	}
 	
 	@Override public String visitDecVar(GraceParser.DecVarContext ctx) { 
-		System.out.println("DECLARACAO VAR");
 		return visitChildren(ctx); 
 	}
 
@@ -102,14 +105,14 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 	
 	@Override public String visitChamadaFuncao(GraceParser.ChamadaFuncaoContext ctx) { return visitChildren(ctx); }
 	
-	@Override public String visitExpressaoIf(GraceParser.ExpressaoIfContext ctx) { return visitChildren(ctx); }
+	//@Override public String visitExpressaoIf(GraceParser.ExpressaoIfContext ctx) { return visitChildren(ctx); }
 	
-	@Override public String visitExpressaoWhile(GraceParser.ExpressaoWhileContext ctx) { return visitChildren(ctx); }
+	//@Override public String visitExpressaoWhile(GraceParser.ExpressaoWhileContext ctx) { return visitChildren(ctx); }
 	
-	@Override public String visitExpressaoFor(GraceParser.ExpressaoForContext ctx) { return visitChildren(ctx); }
+	//@Override public String visitExpressaoFor(GraceParser.ExpressaoForContext ctx) { return visitChildren(ctx); }
 	
-	@Override public String visitExpressaoForCond(GraceParser.ExpressaoForCondContext ctx) { return visitChildren(ctx); }
+	//@Override public String visitExpressaoForCond(GraceParser.ExpressaoForCondContext ctx) { return visitChildren(ctx); }
 	
-	@Override public String visitExpressaoVar(GraceParser.ExpressaoVarContext ctx) { return visitChildren(ctx); }
+	//@Override public String visitExpressaoVar(GraceParser.ExpressaoVarContext ctx) { return visitChildren(ctx); }
 
 }

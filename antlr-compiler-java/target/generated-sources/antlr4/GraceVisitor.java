@@ -237,34 +237,4 @@ public interface GraceVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitChamadaFuncao(GraceParser.ChamadaFuncaoContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GraceParser#expressaoIf}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpressaoIf(GraceParser.ExpressaoIfContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GraceParser#expressaoWhile}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpressaoWhile(GraceParser.ExpressaoWhileContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GraceParser#expressaoFor}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpressaoFor(GraceParser.ExpressaoForContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GraceParser#expressaoForCond}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpressaoForCond(GraceParser.ExpressaoForCondContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GraceParser#expressaoVar}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpressaoVar(GraceParser.ExpressaoVarContext ctx);
 }
