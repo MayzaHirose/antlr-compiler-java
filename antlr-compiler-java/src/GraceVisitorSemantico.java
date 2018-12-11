@@ -5,9 +5,11 @@ import compiler.util.Categoria;
 import compiler.util.TipoDeDado;
 
 public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
-	public static PilhaDeTabelas pilhaDeTabelas; // cada tabela com um escopo
-	public static HashMap<String, ParametroFunProc> mapParametros; // mapeia o nome de cada função e procedimento com uma lista que armazena todos os seus respectivos parâmetros
-    //public static HashMap<String, LinkedList<EntradaTabelaDeSimbolos>> mapRegistros; // mapeia o nome de cada registro com uma lista que armazena todos os seus respectivos campos
+	public static PilhaDeTabelas pilhaDeTabelas;
+	public static HashMap<String, ParametroFunProc> mapParametros;
+    public static String left = "",right="",opRel="";
+    public static Boolean leftOK, opRelacionalOK, rightOK;
+    public static Boolean isParametroSubprograma = Boolean.FALSE;
 	
     public void start(GraceParser.StartContext ctx) {
     	pilhaDeTabelas = new PilhaDeTabelas();
@@ -282,14 +284,39 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 		return ctx.getText(); 
 	}
 
+	@Override public String visitCmdIf(GraceParser.CmdIfContext ctx) { 
+		System.out.println("CMD IF -> " + ctx.getText());
+		
+		left = "";
+		right="";
+		opRel="";
+
+		return visitChildren(ctx); 
+	}
+
+	@Override public String visitCmdWhile(GraceParser.CmdWhileContext ctx) { 
+		System.out.println("CMD WHILE -> " + ctx.getText());
+		
+		left = "";
+		right="";
+		opRel="";
+		
+		return visitChildren(ctx); 
+	}
 	
-	
+	@Override public String visitCmdFor(GraceParser.CmdForContext ctx) { 
+		System.out.println("CMD FOR -> " + ctx.getText());
+		
+		left = "";
+		right="";
+		opRel="";
+		
+		return visitChildren(ctx); 
+	}
 	
 	@Override public String visitBloco(GraceParser.BlocoContext ctx) { 
 		System.out.println("BLOCO -> " + ctx.getText());
 		
-		//String novoEscopo = pilhaDeTabelas.topo().getListaSimbolos().get(pilhaDeTabelas.topo().getListaSimbolos().size()-1).getCadeia();
-		//pilhaDeTabelas.empilhar(new TabelaDeSimbolos(novoEscopo));
 		return visitChildren(ctx); 
 	}
 
@@ -305,29 +332,32 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 		return visitChildren(ctx); 
 	}
 
+	@Override public String visitCmdRead(GraceParser.CmdReadContext ctx) { 
+		System.out.println("CMD READ -> " + ctx.getText());
+		
+		String varToRead = ctx.variavel().getText();
+		if(!GraceSemanticRules.variavelReadDeclarada(varToRead)) {
+			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t O simbolo \"" + varToRead + "\" nao foi declarado.");
+		}
+		return visitChildren(ctx); 
+	}
+	
+	@Override public String visitCmdWrite(GraceParser.CmdWriteContext ctx) { 
+		System.out.println("CMD WRITE -> " + ctx.getText());
+		
+		return visitChildren(ctx); 
+	}
+	
+
 	@Override public String visitCmdAtrib(GraceParser.CmdAtribContext ctx) { 
 		System.out.println("CMD ATRIB -> " + ctx.getText());
+		
 		return visitChildren(ctx); 
 	}
 	
 	@Override public String visitAtrib(GraceParser.AtribContext ctx) { 
 		System.out.println("ATRIB -> " + ctx.getText());
-		return visitChildren(ctx); 
-	}
-
-	@Override public String visitCmdIf(GraceParser.CmdIfContext ctx) { 
-		System.out.println("CMD IF -> " + ctx.getText());
 		
-		return visitChildren(ctx); 
-	}
-
-	@Override public String visitCmdWhile(GraceParser.CmdWhileContext ctx) { 
-		System.out.println("CMD WHILE -> " + ctx.getText());
-		return visitChildren(ctx); 
-	}
-
-	@Override public String visitCmdFor(GraceParser.CmdForContext ctx) { 
-		System.out.println("CMD FOR -> " + ctx.getText());
 		return visitChildren(ctx); 
 	}
 
@@ -343,6 +373,7 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 
 	@Override public String visitCmdStop(GraceParser.CmdStopContext ctx) { 
 		System.out.println("CMD STOP -> " + ctx.getText());
+		
 		return visitChildren(ctx); 
 	}
 
@@ -358,6 +389,22 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 
 	@Override public String visitCmdChamadaProc(GraceParser.CmdChamadaProcContext ctx) { 
 		System.out.println("CMD CHAMADA PROC -> " + ctx.getText());
+		
+		String nomeProcedimento = ctx.getChild(0).getText();
+		if(!GraceSemanticRules.verificaSeExisteProcedimento(nomeProcedimento)) {
+			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A chamada \"" + nomeProcedimento + "\" nao esta disponivel.");
+		} else {
+			if(GraceSemanticRules.subprogramaTemParametros(nomeProcedimento)) {
+				if(ctx.listaExpressao() == null) {
+					System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A chamada \"" + nomeProcedimento + "\" necessita de parametros.");
+				} else {
+					
+				}
+			} else {
+				
+			}
+		}
+		isParametroSubprograma = Boolean.TRUE;
 		return visitChildren(ctx); 
 	}
 	
@@ -366,31 +413,36 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 		return visitChildren(ctx); 
 	}
 	
-	@Override public String visitCmdRead(GraceParser.CmdReadContext ctx) { 
-		System.out.println("CMD READ -> " + ctx.getText());
-		return visitChildren(ctx); 
-	}
-	
-	@Override public String visitCmdWrite(GraceParser.CmdWriteContext ctx) { 
-		System.out.println("CMD WRITE -> " + ctx.getText());
-		return visitChildren(ctx); 
-	}
-	
 	@Override public String visitVariavel(GraceParser.VariavelContext ctx) {
 		System.out.println("VARIAVEL -> " + ctx.getText());
 		
+		left = ctx.getText();
 		return visitChildren(ctx); 
 	}
 	
 	@Override public String visitExpressao(GraceParser.ExpressaoContext ctx) { 
 		System.out.println("EXPRESSAO -> " + ctx.getText());
 		
-		String left = "true";
-		String opRelacional = "<=";
-		String right = "3";
-		
-		if(!GraceSemanticRules.verificaExpressaoIfCorreto(left, opRelacional, right)) {
-			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A expressao do if nao e valida.");
+		if(!isParametroSubprograma) {
+			if(ctx.OP_EXPRESSAO() != null) {
+				opRel = ctx.OP_EXPRESSAO().getText();
+			}
+			right = ctx.getText();
+			
+			if(!left.isEmpty()) {
+				if(!GraceSemanticRules.verificaExpressaoIfCorreto(left, opRel, right)) {
+					System.out.println(leftOK +" "+ opRelacionalOK+" "+  rightOK);
+					if(!leftOK)
+						System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A expressao nao e valida. Variavel \"" + left + "\" nao esta definida ou nao e do tipo inteiro");
+					if(!opRelacionalOK)
+						System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A expressao nao e valida. O resultado deve ser logico");
+					if(!rightOK)
+						System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A expressao nao e valida. Variavel \"" + right + "\" nao esta definida ou nao e do tipo inteiro");
+					
+				}
+			}
+		} else {
+			System.out.println("oaoaooaoaoa");
 		}
 		
 		return visitChildren(ctx); 

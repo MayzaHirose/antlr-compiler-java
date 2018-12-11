@@ -145,9 +145,18 @@ public class GraceSemanticRules {
 		if(GraceVisitorSemantico.pilhaDeTabelas.topo().existeSimbolo(valor) || existeSimboloNoEscopoGlobal(valor)) {
 			if(!GraceVisitorSemantico.pilhaDeTabelas.topo().getSimbolo(valor).getTipoDeDado().equals(tipoEsperado)) {
 				return Boolean.FALSE;
+			} else {
+				return Boolean.TRUE;
 			}
 		}
-		return Boolean.TRUE;
+		return Boolean.FALSE;
+	}
+	
+	public static Boolean variavelReadDeclarada(String valor) {
+		if(GraceVisitorSemantico.pilhaDeTabelas.topo().existeSimbolo(valor) || existeSimboloNoEscopoGlobal(valor)) {
+			return Boolean.TRUE;
+		}
+		return Boolean.FALSE;
 	}
 	
 	private static Boolean expressaoPossuiMesmoTipoInteiro(String valor, TipoDeDado tipoEsperado) {
@@ -177,7 +186,7 @@ public class GraceSemanticRules {
 		for(TabelaDeSimbolos tbl: GraceVisitorSemantico.pilhaDeTabelas.getPilha()) {
 			if(tbl.getEscopo().equals("global")) {
 				if(tbl.existeSimbolo(c)) {
-					tbl.getSimbolo(c).getTipoDeDado();
+					return tbl.getSimbolo(c).getTipoDeDado().equals(TipoDeDado.INT);
 				}
 			}
 		}
@@ -185,29 +194,36 @@ public class GraceSemanticRules {
 	}
 	
 	public static Boolean verificaExpressaoIfCorreto(String left, String opRelacional, String right) {
-		Boolean leftOK;
-		Boolean opRelacionalOK;
-		Boolean rightOK;
-		
-		leftOK = integerOk(left);
-		rightOK = integerOk(right);
-		opRelacionalOK = isOperadorFuncional(opRelacional);
-		
-		return leftOK && opRelacionalOK && rightOK;
+		GraceVisitorSemantico.leftOK = integerOk(left);
+		GraceVisitorSemantico.rightOK = integerOk(right);
+		GraceVisitorSemantico.opRelacionalOK = isOperadorFuncional(opRelacional);
+		return GraceVisitorSemantico.leftOK && GraceVisitorSemantico.opRelacionalOK && GraceVisitorSemantico.rightOK;
 	}
 	
-	public static Boolean integerOk(String left) {
-		if(GraceVisitorSemantico.pilhaDeTabelas.topo().existeSimbolo(left)) {
-			if(GraceVisitorSemantico.pilhaDeTabelas.topo().getSimbolo(left).getTipoDeDado().equals(TipoDeDado.INT)) {
+	public static Boolean verificaSeExisteProcedimento(String nome) {
+		for(TabelaDeSimbolos tbl: GraceVisitorSemantico.pilhaDeTabelas.getPilha()) {
+			if(tbl.getEscopo().equals("global")) {
+				return tbl.existeSimbolo(nome);
+			}
+		}
+		return Boolean.FALSE;
+	}
+	
+	public static Boolean subprogramaTemParametros(String nome) {
+		ParametroFunProc parametrosSubprograma = GraceVisitorSemantico.mapParametros.get(nome);
+		return parametrosSubprograma.getOrdemParametros().size() > 0;
+	}
+	
+	public static Boolean integerOk(String valor) {
+		if(GraceVisitorSemantico.pilhaDeTabelas.topo().existeSimbolo(valor)) {
+			if(GraceVisitorSemantico.pilhaDeTabelas.topo().getSimbolo(valor).getTipoDeDado().equals(TipoDeDado.INT)) {
 				return Boolean.TRUE;
 			}
-		} else if(existeSimboloNoEscopoGlobal(left)) {
-			if(GraceVisitorSemantico.pilhaDeTabelas.topo().getSimbolo(left).getTipoDeDado().equals(TipoDeDado.INT)) {
-				return Boolean.TRUE;
-			}
+		} else if(existeSimboloNoEscopoGlobal(valor)) {
+			return Boolean.TRUE;
 		} else {
 			try {
-				Integer.parseInt(left);
+				Integer.parseInt(valor);
 				return Boolean.TRUE;
 			} catch (Exception e) {
 				return Boolean.FALSE;
