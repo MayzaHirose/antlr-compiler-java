@@ -214,6 +214,72 @@ public class GraceSemanticRules {
 		return parametrosSubprograma.getOrdemParametros().size() > 0;
 	}
 	
+	public static Boolean tipoParametroOK(String param, int ordem, String nomeSubprograma) {
+		TipoDeDado tipoEsperado = GraceVisitorSemantico.mapParametros.get(nomeSubprograma).getOrdemParametros().get(ordem);
+		Boolean isTipoCorreto = Boolean.FALSE;
+		TipoDeDado tipoEncontrado = null;
+		
+		switch (tipoEsperado.toString()) {
+		case "int":
+			if(isExpressaoAritmetica(param) || isVariavelDeclarada(param, tipoEsperado)) {
+				isTipoCorreto = expressaoPossuiMesmoTipoInteiro(param, tipoEsperado);
+			} else {
+				try {
+					Integer.parseInt(param);
+					isTipoCorreto = Boolean.TRUE;
+				} catch (Exception e) {
+					if(param.equals("true") || param.equals("false")) {
+						tipoEncontrado = TipoDeDado.BOOL;
+					} else {
+						tipoEncontrado = TipoDeDado.STRING;
+					}
+					isTipoCorreto = Boolean.FALSE;
+				}	
+			}
+			break;
+		case "string":
+			if(isExpressaoAritmetica(param)) {
+				isTipoCorreto = Boolean.FALSE;
+			} else {
+				if(param.startsWith("\"") && param.endsWith("\"")) {
+					isTipoCorreto = Boolean.TRUE;
+				} else {
+					if(param.equals("true") || param.equals("false")) {
+						tipoEncontrado = TipoDeDado.BOOL;
+					} else {
+						tipoEncontrado = TipoDeDado.INT;
+					}
+					isTipoCorreto = Boolean.FALSE;
+				}
+			}
+			break;
+		case "bool":
+			if(isExpressaoAritmetica(param)) {
+				isTipoCorreto = Boolean.FALSE;
+			} else {
+				switch (param) {
+				case "true":
+					isTipoCorreto = Boolean.TRUE;
+					break;
+				case "false":
+					isTipoCorreto = Boolean.TRUE;
+					break;
+				default:
+					if(param.startsWith("\"") && param.endsWith("\"")) {
+						tipoEncontrado = TipoDeDado.STRING;
+					} else {
+						tipoEncontrado = TipoDeDado.INT;
+					}
+					isTipoCorreto = Boolean.FALSE;
+					break;
+				}
+			}
+			break;
+		}
+		
+		return isTipoCorreto;
+	}
+	
 	public static Boolean integerOk(String valor) {
 		if(GraceVisitorSemantico.pilhaDeTabelas.topo().existeSimbolo(valor)) {
 			if(GraceVisitorSemantico.pilhaDeTabelas.topo().getSimbolo(valor).getTipoDeDado().equals(TipoDeDado.INT)) {

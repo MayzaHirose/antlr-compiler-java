@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 public class Grace {
 	public static void main( String[] args) throws Exception 	{     
         
-		GraceLexer lexer = new GraceLexer(CharStreams.fromFileName("src/Code.grc"));
+		GraceLexer lexer = new GraceLexer(CharStreams.fromFileName("src/code_teste.grc"));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		
 		GraceParser parser = new GraceParser(tokens);
@@ -29,7 +29,7 @@ public class Grace {
         GraceVisitorSemantico visitorSemantico = new GraceVisitorSemantico();
         visitorSemantico.start(tree);
         
-        for(int i=0;i<GraceVisitorSemantico.pilhaDeTabelas.qtdTabelas;i++) {
+        /*for(int i=0;i<GraceVisitorSemantico.pilhaDeTabelas.qtdTabelas;i++) {
         	List<EntradaTabelaDeSimbolos> listaDeSimbolos = GraceVisitorSemantico.pilhaDeTabelas.topo().getListaSimbolos();
 			for(EntradaTabelaDeSimbolos simbolo: listaDeSimbolos) {
 				if(i==0) System.out.println("Escopo: " + GraceVisitorSemantico.pilhaDeTabelas.topo().getEscopo());
@@ -37,6 +37,6 @@ public class Grace {
 			}
 			System.out.println("--------------------------------------------------------");
 			GraceVisitorSemantico.pilhaDeTabelas.desempilhar();
-        }
+        }*/
 	}
 }

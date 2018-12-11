@@ -28,7 +28,7 @@ grammar Grace;
  specParam				: param  ((COMMA param)+)? COLON tipo ;
  param					: (IDENTIFIER | IDENTIFIER BRACKETS_OPEN BRACKETS_CLOSE) ;
  bloco					: CBRACES_OPEN (declaracao+)? (comando+)? CBRACES_CLOSE ;
- comando				: (cmdSimples) ; //| cmdBloco) ;
+ comando				: (cmdSimples) ;
  
  cmdSimples				: (cmdAtrib | cmdIf | cmdWhile | cmdFor | cmdStop | cmdSkip |cmdReturn | cmdChamadaProc | cmdRead | cmdWrite);
  
@@ -48,16 +48,9 @@ grammar Grace;
  cmdWrite				: WRITE_KW expressao ((COMMA expressao)+)? SEMICOLON ;
  variavel				: (IDENTIFIER | (IDENTIFIER BRACKETS_OPEN expressao BRACKETS_CLOSE)) ;
  
- //cmdBloco				: AND ;
- 
  expressao				: (STRING | INTEGER | BOOLEAN | variavel | chamadaFuncao | (PAREN_OPEN expressao PAREN_CLOSE)) ((OP_EXPRESSAO | OP_ARITMETICO) expressao)?;
  chamadaFuncao			: IDENTIFIER PAREN_OPEN listaExpressao? PAREN_CLOSE ;
  
- //expressaoIf			: (INTEGER | BOOLEAN | variavel | chamadaFuncao | (PAREN_OPEN expressaoIf PAREN_CLOSE)) ((OP_EXPRESSAO) expressaoIf)? ;
- //expressaoWhile			: expressaoIf ;
- //expressaoFor			: variavel OP_EXPRESSAO expressaoForCond ;
- //expressaoForCond		: (INTEGER | variavel | chamadaFuncao | (PAREN_OPEN expressaoForCond PAREN_CLOSE)) (OP_ARITMETICO expressaoForCond)? ;
- //expressaoVar			: (INTEGER | variavel | chamadaFuncao | (PAREN_OPEN expressaoVar PAREN_CLOSE)) (OP_ARITMETICO expressaoVar)? ;
  
  
  /*
