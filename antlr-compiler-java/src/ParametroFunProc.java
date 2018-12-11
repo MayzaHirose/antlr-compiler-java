@@ -28,7 +28,4 @@ public class ParametroFunProc {
 	public void setOrdemParametros(List<TipoDeDado> ordemParametros) {
 		this.ordemParametros = ordemParametros;
 	}
-	
-	
-	
 }

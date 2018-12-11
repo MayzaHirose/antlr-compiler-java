@@ -20,11 +20,7 @@ public class TabelaDeSimbolos {
     public void adicionarSimbolo(EntradaTabelaDeSimbolos simbolo) {
         simbolos.add(simbolo);
     }
-    
-    public void atualizarSimbolo() {
-    	
-    }
-    
+
     public Boolean existeSimbolo(String cadeia) {
         for(EntradaTabelaDeSimbolos etds : simbolos) {
             if(etds.getCadeia().equals(cadeia)) {

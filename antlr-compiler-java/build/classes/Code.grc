@@ -211,20 +211,22 @@
     //}
 
 //}
-var x,y=2+x:int;
-var h[1],v[5]={0,1,2,3,4}: int;
-var m="mayza":string;
-var n=3:int;
-var o=n:int;
+//var x,y=2+x:int;
+//var h[1],v[5]={0,1,2,3,4}: int;
+//var m="mayza":string;
+//var n=3:int;
+//var o=n:int;
 
 //def proc(x:int;y,z:string) {
-//var j=x+x:int;
+//var j=1+1:int;
+//return;
 //}
 
-//def main(x[]:int):int{
-//var k=m:string;
-//proc(1,"maay", "rafa");
-//return 0;
-//}
+def main(x[]:int):int{
+var k="mayza":string;
+if(i>=0){
+	i=9;
+}
+}
 
 

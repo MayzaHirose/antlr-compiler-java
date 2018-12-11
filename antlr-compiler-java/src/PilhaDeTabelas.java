@@ -42,4 +42,8 @@ public class PilhaDeTabelas {
         }
         return null;
     }
+    
+    public LinkedList<TabelaDeSimbolos> getPilha() {
+    	return pilha;
+    }
 }
