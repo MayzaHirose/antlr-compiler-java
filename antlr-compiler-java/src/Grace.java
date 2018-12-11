@@ -29,9 +29,13 @@ public class Grace {
         GraceVisitorSemantico visitorSemantico = new GraceVisitorSemantico();
         visitorSemantico.teste(tree);
         
-        List<EntradaTabelaDeSimbolos> listaDeSimbolos = GraceVisitorSemantico.pilhaDeTabelas.topo().getListaSimbolos();
-		for(EntradaTabelaDeSimbolos simbolo: listaDeSimbolos) {
-			System.out.println(simbolo.getCadeia() + "\t" + simbolo.getCategoria() + "\t" + simbolo.getTipoDeDado() + "\t" + simbolo.getValor());
-		}
+        for(int i=0;i<GraceVisitorSemantico.pilhaDeTabelas.qtdTabelas;i++) {
+        	List<EntradaTabelaDeSimbolos> listaDeSimbolos = GraceVisitorSemantico.pilhaDeTabelas.topo().getListaSimbolos();
+			for(EntradaTabelaDeSimbolos simbolo: listaDeSimbolos) {
+				System.out.println(simbolo.getCadeia() + "\t" + simbolo.getCategoria() + "\t" + simbolo.getTipoDeDado() + "\t" + simbolo.getValor());
+			}
+			System.out.println("----------------------------------------");
+			GraceVisitorSemantico.pilhaDeTabelas.desempilhar();
+        }
 	}
 }

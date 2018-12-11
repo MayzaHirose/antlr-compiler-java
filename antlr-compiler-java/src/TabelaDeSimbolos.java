@@ -25,13 +25,13 @@ public class TabelaDeSimbolos {
     	
     }
     
-    public boolean existeSimbolo(String cadeia) {
+    public Boolean existeSimbolo(String cadeia) {
         for(EntradaTabelaDeSimbolos etds : simbolos) {
             if(etds.getCadeia().equals(cadeia)) {
-                return true;
+                return Boolean.TRUE;
             }
         }
-        return false;
+        return Boolean.FALSE;
     }
     
     public String getEscopo(){

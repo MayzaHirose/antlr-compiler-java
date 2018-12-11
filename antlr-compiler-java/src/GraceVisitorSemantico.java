@@ -7,9 +7,9 @@ import compiler.util.Categoria;
 import compiler.util.TipoDeDado;
 
 public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
-	public static PilhaDeTabelas pilhaDeTabelas; // cada tabela comum escopo
-    HashMap<String, LinkedList<EntradaTabelaDeSimbolos>> mapRegistros; // mapeia o nome de cada registro com uma lista que armazena todos os seus respectivos campos
-    HashMap<String, ParametroFunProc> mapParametros; // mapeia o nome de cada função e procedimento com uma lista que armazena todos os seus respectivos parâmetros
+	public static PilhaDeTabelas pilhaDeTabelas; // cada tabela com um escopo
+    public static HashMap<String, LinkedList<EntradaTabelaDeSimbolos>> mapRegistros; // mapeia o nome de cada registro com uma lista que armazena todos os seus respectivos campos
+    public static HashMap<String, ParametroFunProc> mapParametros; // mapeia o nome de cada função e procedimento com uma lista que armazena todos os seus respectivos parâmetros
 	
     public void teste(GraceParser.StartContext ctx) {
     	pilhaDeTabelas = new PilhaDeTabelas();
@@ -17,11 +17,11 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
         mapParametros = new HashMap<>();
         pilhaDeTabelas.empilhar(new TabelaDeSimbolos("global"));
         
-    	System.err.println(visitStart(ctx));
+    	visitStart(ctx);
     	
-    	if(pilhaDeTabelas.topo().getListaSimbolos().get(pilhaDeTabelas.topo().getListaSimbolos().size()-1).getCadeia().equals("main")) {
+    	/*if(pilhaDeTabelas.topo().getListaSimbolos().get(pilhaDeTabelas.topo().getListaSimbolos().size()-1).getCadeia().equals("main")) {
     		System.out.println("Sucesso");
-    	}
+    	}*/
     	
     }
     
@@ -47,9 +47,64 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 		return visitChildren(ctx); 
 	}
 
+	@Override public String visitSpecVar(GraceParser.SpecVarContext ctx) { 
+		System.out.println("SPEC VAR -> " + ctx.getText());
+		return visitChildren(ctx); 
+	}
+	
+	@Override public String visitSpecVarSimples(GraceParser.SpecVarSimplesContext ctx) { 
+		System.out.println("SPEC VAR SIMPLES -> " + ctx.getText());
+		
+		TabelaDeSimbolos tabelaDeSimbolos = pilhaDeTabelas.topo();
+		if(!GraceSemanticRules.verificaExisteVariavelMesmoNome(ctx.getText(), tabelaDeSimbolos)) {
+			pilhaDeTabelas.topo().adicionarSimbolo(ctx.getText(), Categoria.VARIAVEL, null, null);
+		} else {
+			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A seguinte variavel ja foi declarada: " + ctx.getText());
+		}
+		return visitChildren(ctx); 
+	}
+	
+	@Override public String visitSpecVarSimplesIni(GraceParser.SpecVarSimplesIniContext ctx) { 
+		System.out.println("SPEC VAR SIMPLES INI -> " + ctx.getText());
+		
+		TabelaDeSimbolos tabelaDeSimbolos = pilhaDeTabelas.topo();
+		if(!GraceSemanticRules.verificaExisteVariavelMesmoNome(ctx.IDENTIFIER().getText(), tabelaDeSimbolos)) {
+			pilhaDeTabelas.topo().adicionarSimbolo(ctx.IDENTIFIER().getText(), Categoria.VARIAVEL, null, null);
+		} else {
+			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A seguinte variavel ja foi declarada: " + ctx.IDENTIFIER().getText());
+		}
+		return visitChildren(ctx); 
+	}
+	
+	@Override public String visitExpVarSimplesIni(GraceParser.ExpVarSimplesIniContext ctx) { 
+		System.out.println("EXP VAR SIMPLES INI -> " + ctx.getText());
+		
+		List<EntradaTabelaDeSimbolos> listaDeSimbolos = pilhaDeTabelas.topo().getListaSimbolos();
+		EntradaTabelaDeSimbolos simboloContexto = listaDeSimbolos.get(listaDeSimbolos.size()-1);
+		for(int i=0;i<ctx.getChildCount()-1;i++) {	
+			if(simboloContexto.getValor() == null) {
+				simboloContexto.setValor(ctx.getChild(i).getText());
+			} else {
+				simboloContexto.setValor(simboloContexto.getValor()+ctx.getChild(i).getText());
+			}
+		}
+		if(ctx.variavel() != null) {
+			if(GraceSemanticRules.verificaExisteVariavelMesmoNome(ctx.variavel().getText(), pilhaDeTabelas.topo())) {
+				if(simboloContexto.getValor() == null) {
+					simboloContexto.setValor(ctx.variavel().getText());
+				} else {
+					simboloContexto.setValor(simboloContexto.getValor()+ctx.variavel().getText());
+				}
+			} else {
+				System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A seguinte variavel nao esta declarada: " + ctx.variavel().getText());
+			}
+		}
+		return visitChildren(ctx); 
+	}
+
 	@Override public String visitTipo(GraceParser.TipoContext ctx) { 
 		System.out.println("TIPO -> " + ctx.getText());
-		List<EntradaTabelaDeSimbolos> listaDeSimbolos = pilhaDeTabelas.topo().getListaSimbolos();
+		/*List<EntradaTabelaDeSimbolos> listaDeSimbolos = pilhaDeTabelas.topo().getListaSimbolos();
 		for(EntradaTabelaDeSimbolos simbolo: listaDeSimbolos) {
 			if(simbolo.getTipoDeDado() == null) {
 				switch (ctx.getText()) {
@@ -97,37 +152,8 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 					break;
 				}
 			}
-		}
+		}*/
 		return visitChildren(ctx);
-	}
-
-	@Override public String visitSpecVar(GraceParser.SpecVarContext ctx) { 
-		System.out.println("SPEC VAR -> " + ctx.getText());
-		return visitChildren(ctx); 
-	}
-
-	@Override public String visitSpecVarSimples(GraceParser.SpecVarSimplesContext ctx) { 
-		System.out.println("SPEC VAR SIMPLES -> " + ctx.getText());
-		TabelaDeSimbolos tabelaDeSimbolos = pilhaDeTabelas.topo();
-		if(!GraceSemanticRules.verificaExisteVariavelMesmoNome(ctx.IDENTIFIER().getText(), tabelaDeSimbolos)) {
-			pilhaDeTabelas.topo().adicionarSimbolo(ctx.IDENTIFIER().getText(), Categoria.VARIAVEL, null, null);
-			return visitChildren(ctx); 
-		} else {
-			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A seguinte variavel ja foi declarada: " + ctx.IDENTIFIER().getText());
-		}
-		return ""; 
-	}
-
-	@Override public String visitSpecVarSimplesIni(GraceParser.SpecVarSimplesIniContext ctx) { 
-		System.out.println("SPEC VAR SIMPLES INI -> " + ctx.getText());
-		TabelaDeSimbolos tabelaDeSimbolos = pilhaDeTabelas.topo();
-		if(!GraceSemanticRules.verificaExisteVariavelMesmoNome(ctx.IDENTIFIER().getText(), tabelaDeSimbolos)) {
-			pilhaDeTabelas.topo().adicionarSimbolo(ctx.IDENTIFIER().getText(), Categoria.VARIAVEL, null, null);
-			return visitChildren(ctx); 
-		} else {
-			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A seguinte variavel ja foi declarada: " + ctx.IDENTIFIER().getText());
-		}
-		return "";
 	}
 
 	@Override public String visitSpecVarArranjo(GraceParser.SpecVarArranjoContext ctx) { 
@@ -152,17 +178,6 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A seguinte variavel ja foi declarada: " + ctx.IDENTIFIER().getText());
 		}
 		return "";
-	}
-
-	@Override public String visitExpVarSimplesIni(GraceParser.ExpVarSimplesIniContext ctx) { 
-		System.out.println("EXP VAR SIMPLES INI -> " + ctx.getText());
-		List<EntradaTabelaDeSimbolos> listaDeSimbolos = pilhaDeTabelas.topo().getListaSimbolos();
-		EntradaTabelaDeSimbolos simboloContexto = listaDeSimbolos.get(listaDeSimbolos.size()-1);
-		if(simboloContexto.getValor() == null) {
-			simboloContexto.setValor(ctx.getText());
-		}
-		
-		return visitChildren(ctx); 
 	}
 	
 	@Override public String visitExpVarArranjoIni(GraceParser.ExpVarArranjoIniContext ctx) { 
@@ -214,10 +229,10 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 			//param.get(TipoDeDado.INT).add(var);
 			break;
 		case "bool":
-			param.get(TipoDeDado.BOOL).add(var);
+			//param.get(TipoDeDado.BOOL).add(var);
 			break;
 		case "string":
-			param.get(TipoDeDado.STRING).add(var);
+			//param.get(TipoDeDado.STRING).add(var);
 			break;
 		}
 		//mapParametros.get(pilhaDeTabelas.topo().getEscopo()).setParametros(parametros);;

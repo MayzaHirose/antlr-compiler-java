@@ -211,8 +211,18 @@
     //}
 
 //}
-def procedimento(x,y:int; j:int) {
-var y=2 : int;
-}
+var x,y=2+j:int;
+var v[5]={0,1,2,3,4}: int;
+//var m="mayza":string;
+
+//def proc(x:int;y,z:string) {
+//var j=x+x:int;
+//}
+
+//def main(x[]:int):int{
+//var k=m:string;
+//proc(1,"maay", "rafa");
+//return 0;
+//}
 
 

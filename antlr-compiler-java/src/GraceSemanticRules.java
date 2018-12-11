@@ -90,10 +90,7 @@ public class GraceSemanticRules {
 	}
 
 	public static Boolean verificaExisteVariavelMesmoNome(String cadeia, TabelaDeSimbolos tabelaDeSimbolos) {
-		if(tabelaDeSimbolos.existeSimbolo(cadeia)) {
-			return Boolean.TRUE;
-		}
-		return Boolean.FALSE;
+		return tabelaDeSimbolos.existeSimbolo(cadeia);
 	}
 	
 	private static Boolean isExpressaoAritmetica(String valor) {

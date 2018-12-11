@@ -5,6 +5,7 @@ import compiler.util.TipoDeDado;
 //A pilha de tabelas é a pilha de escopos, com cada tabela representando um escopo
 public class PilhaDeTabelas {
     private final LinkedList<TabelaDeSimbolos> pilha;
+    public int qtdTabelas = 0;
 
     public PilhaDeTabelas() {
         pilha = new LinkedList<>();
@@ -12,6 +13,7 @@ public class PilhaDeTabelas {
 
     public void empilhar(TabelaDeSimbolos ts) {
         pilha.push(ts);
+        qtdTabelas++;
     }
 
     public TabelaDeSimbolos topo() {
