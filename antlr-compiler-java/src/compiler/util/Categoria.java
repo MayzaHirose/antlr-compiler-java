@@ -1,5 +1,5 @@
 package compiler.util;
 
 public enum Categoria {
-	VARIAVEL, FUNCAO, PROCEDIMENTO;
+	VARIAVEL_SIMPLES, VARIAVEL_ARRANJO, FUNCAO, PROCEDIMENTO;
 }
