@@ -117,6 +117,16 @@ public interface GraceListener extends ParseTreeListener {
 	 */
 	void exitExpVarSimplesIni(GraceParser.ExpVarSimplesIniContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GraceParser#expVarArranjoIni}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpVarArranjoIni(GraceParser.ExpVarArranjoIniContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GraceParser#expVarArranjoIni}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpVarArranjoIni(GraceParser.ExpVarArranjoIniContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GraceParser#memoriaReservada}.
 	 * @param ctx the parse tree
 	 */

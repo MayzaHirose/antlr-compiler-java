@@ -13,9 +13,10 @@ grammar Grace;
  specVarSimples			: IDENTIFIER ;
  specVarSimplesIni		: IDENTIFIER ATTRIB expVarSimplesIni;
  specVarArranjo			: IDENTIFIER memoriaReservada ;
- specVarArranjoIni		: IDENTIFIER memoriaReservada ATTRIB CBRACES_OPEN (INTEGER | BOOLEAN | STRING) ((COMMA (INTEGER | BOOLEAN | STRING))+)? CBRACES_CLOSE;
+ specVarArranjoIni		: IDENTIFIER memoriaReservada ATTRIB CBRACES_OPEN expVarArranjoIni CBRACES_CLOSE;
  
- expVarSimplesIni		: (STRING | INTEGER | BOOLEAN | variavel | (PAREN_OPEN expVarSimplesIni PAREN_CLOSE)) (OP_ARITMETICO expVarSimplesIni)?;
+ expVarSimplesIni		: (STRING | INTEGER | BOOLEAN | variavel | (PAREN_OPEN expVarSimplesIni PAREN_CLOSE)) (OP_ARITMETICO expVarSimplesIni)? ;
+ expVarArranjoIni		: (INTEGER | BOOLEAN | STRING) ((COMMA (INTEGER | BOOLEAN | STRING))+)? ;
  memoriaReservada		: BRACKETS_OPEN INTEGER? BRACKETS_CLOSE ;
 
  decSub					: (decProc | decFunc) ;

@@ -1,5 +1,5 @@
-import compiler.util.TipoDeDado;
 import compiler.util.Categoria;
+import compiler.util.TipoDeDado;
 
 public class EntradaTabelaDeSimbolos {
     private String cadeia;

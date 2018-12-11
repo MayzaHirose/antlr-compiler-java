@@ -76,6 +76,12 @@ public interface GraceVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpVarSimplesIni(GraceParser.ExpVarSimplesIniContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GraceParser#expVarArranjoIni}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpVarArranjoIni(GraceParser.ExpVarArranjoIniContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GraceParser#memoriaReservada}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

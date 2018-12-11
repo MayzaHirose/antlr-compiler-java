@@ -211,4 +211,8 @@
     //}
 
 //}
+def procedimento(x,y:int; j:int) {
+var y=2 : int;
+}
+
 

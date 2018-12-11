@@ -27,7 +27,7 @@ public class Grace {
 	    
 	    // Análise semântica
         GraceVisitorSemantico visitorSemantico = new GraceVisitorSemantico();
-        visitorSemantico.visitStart(tree);
+        visitorSemantico.teste(tree);
         
         List<EntradaTabelaDeSimbolos> listaDeSimbolos = GraceVisitorSemantico.pilhaDeTabelas.topo().getListaSimbolos();
 		for(EntradaTabelaDeSimbolos simbolo: listaDeSimbolos) {

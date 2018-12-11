@@ -1,7 +1,7 @@
 package compiler.util;
 
 public enum TipoDeDado {
-	INT("int"), STRING("string"), BOOL("bool");
+	INT("int"), STRING("string"), BOOL("bool"), VAZIO("vazio");
 	
 	private final String text;
 

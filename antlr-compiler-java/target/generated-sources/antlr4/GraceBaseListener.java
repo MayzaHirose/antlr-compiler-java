@@ -147,6 +147,18 @@ public class GraceBaseListener implements GraceListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExpVarArranjoIni(GraceParser.ExpVarArranjoIniContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpVarArranjoIni(GraceParser.ExpVarArranjoIniContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMemoriaReservada(GraceParser.MemoriaReservadaContext ctx) { }
 	/**
 	 * {@inheritDoc}
