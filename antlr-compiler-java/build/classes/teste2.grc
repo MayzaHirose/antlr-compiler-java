@@ -1,0 +1,23 @@
+// chamada de procedimento
+// identificacao de quantidade de argumentos passados por parametro
+// identificacao do tipo dos argumentos passados por parametro
+// identificacao da existencia do procedimento
+
+//Variaveis corretas
+var a, b = 3, c = 2 + b: int;
+var str1, str2 = "String 2": string;
+var i, j = true: bool;
+var x, v[10], z[3] = {1, 5, 8}: int;
+
+def procedimento(x,y:int;k:bool;str,str2:string) {
+	var a = 1: int;
+}
+
+def main(x[], y: int; z: bool): int {
+    procedimento();
+    procedimento(1,2,3,4,5); //passando a qtd de argumentos correto mas com tipos errados
+    procedimento(1,2,true,"string"); //passando tipos corretos mas faltando 1 param
+    procedimento(1,2,true, "hello", "hi"); //passando td corretamente
+    umaFuncaoNaoDeclarada();
+    return 0;
+}

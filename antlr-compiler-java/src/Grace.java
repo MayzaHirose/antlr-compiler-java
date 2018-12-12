@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 public class Grace {
 	public static void main( String[] args) throws Exception 	{     
         
-		GraceLexer lexer = new GraceLexer(CharStreams.fromFileName("src/code_teste.grc"));
+		GraceLexer lexer = new GraceLexer(CharStreams.fromFileName("src/teste3.grc"));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		
 		GraceParser parser = new GraceParser(tokens);

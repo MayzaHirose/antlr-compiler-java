@@ -1,0 +1,31 @@
+// Declaração de variáveis e subprogramas
+// Verificacao de tipos
+// verificacao de inicialização
+// identificacao da main
+
+//Variaveis corretas
+var a, b = 3, c = 2 + b: int;
+var str1, str2 = "String 2": string;
+var i, j = true: bool;
+var x, v[10], z[3] = {1, 5, 8}: int;
+
+//Variaveis repetidas
+var x, v[10], z[3] = {1, 5, 8}: int;
+
+//Variaveis inicializadas incorretamente
+var m1, m2[10], m3[3] = {"mayza", "igor", 1}: int;
+var s1, minha_string = 23: string;
+var boleano1, boleano2 = 3: bool;
+
+//Variaveis nao inicializadas e utilizadas
+var jota = 2 + opcao: int;
+
+def procedimento(x,y:int;k:bool) {
+	var a = true: int;
+    return;
+}
+
+def main(x[], y: int; z: bool): int {
+    var a = str2: string;
+    return 0;
+}

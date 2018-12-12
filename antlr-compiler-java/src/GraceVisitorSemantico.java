@@ -20,7 +20,7 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
     	visitStart(ctx);
     	
     	if(!pilhaDeTabelas.topo().getEscopo().equals("main")) {
-    		System.err.println("Erro Semântico -> A funcao main deve estar declarada no final do programa");
+    		System.err.println("Erro Semântico -> Funcao \"main\" nao encontrada. Deve ser declarada no final do programa.");
     	}
   	
     }
@@ -62,7 +62,7 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 		if(!GraceSemanticRules.verificaExisteVariavelMesmoNome(ctx.getText(), tabelaDeSimbolos)) {
 			pilhaDeTabelas.topo().adicionarSimbolo(ctx.getText(), Categoria.VARIAVEL_SIMPLES, null, null);
 		} else {
-			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A seguinte variavel ja foi declarada: " + ctx.getText());
+			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t O seguinte simbolo ja foi declarado anteriomente: " + ctx.getText());
 		}
 		return visitChildren(ctx); 
 	}
@@ -74,7 +74,7 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 		if(!GraceSemanticRules.verificaExisteVariavelMesmoNome(ctx.IDENTIFIER().getText(), tabelaDeSimbolos)) {
 			pilhaDeTabelas.topo().adicionarSimbolo(ctx.IDENTIFIER().getText(), Categoria.VARIAVEL_SIMPLES, null, null);
 		} else {
-			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A seguinte variavel ja foi declarada: " + ctx.IDENTIFIER().getText());
+			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t O seguinte simbolo ja foi declarado anteriormente: " + ctx.IDENTIFIER().getText());
 		}
 		return visitChildren(ctx); 
 	}
@@ -100,7 +100,7 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 						simboloContexto.setValor(simboloContexto.getValor()+ctx.variavel().getText());
 					}
 				} else {
-					System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A seguinte variavel nao esta declarada: " + ctx.variavel().getText());
+					System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t O seguinte simbolo nao foi declarado anteriormente: " + ctx.variavel().getText());
 				}
 			} else {
 				if(simboloContexto.getValor() == null) {
@@ -120,7 +120,7 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 		if(!GraceSemanticRules.verificaExisteVariavelMesmoNome(ctx.IDENTIFIER().getText(), tabelaDeSimbolos)) {
 			pilhaDeTabelas.topo().adicionarSimbolo(ctx.IDENTIFIER().getText(), Categoria.VARIAVEL_ARRANJO, null, null);
 		} else {
-			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A seguinte variavel ja foi declarada: " + ctx.IDENTIFIER().getText());
+			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t O seguinte simbolo ja foi declarado anteriormente: " + ctx.IDENTIFIER().getText());
 		}
 		return visitChildren(ctx); 
 	}
@@ -132,7 +132,7 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 		if(!GraceSemanticRules.verificaExisteVariavelMesmoNome(ctx.IDENTIFIER().getText(), tabelaDeSimbolos)) {
 			pilhaDeTabelas.topo().adicionarSimbolo(ctx.IDENTIFIER().getText(), Categoria.VARIAVEL_ARRANJO, null, null); 
 		} else {
-			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A seguinte variavel ja foi declarada: " + ctx.IDENTIFIER().getText());
+			System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t O seguinte simbolo ja foi declarado anteriormente: " + ctx.IDENTIFIER().getText());
 		}
 		return visitChildren(ctx);
 	}
@@ -411,7 +411,6 @@ public class GraceVisitorSemantico extends GraceBaseVisitor<String> {
 			
 			if(!left.isEmpty()) {
 				if(!GraceSemanticRules.verificaExpressaoIfCorreto(left, opRel, right)) {
-					System.out.println(leftOK +" "+ opRelacionalOK+" "+  rightOK);
 					if(!leftOK)
 						System.err.println("Erro Semântico -> Linha: " + ctx.start.getLine() + "  Coluna:" + ctx.start.getCharPositionInLine() + "\t A expressao nao e valida. Variavel \"" + left + "\" nao esta definida ou nao e do tipo inteiro");
 					if(!opRelacionalOK)
