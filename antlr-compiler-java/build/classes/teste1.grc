@@ -22,10 +22,11 @@ var jota = 2 + opcao: int;
 
 def procedimento(x,y:int;k:bool) {
 	var a = true: int;
+	var a: bool;
     return;
 }
 
 def main(x[], y: int; z: bool): int {
     var a = str2: string;
-    return 0;
+    // return 0;
 }

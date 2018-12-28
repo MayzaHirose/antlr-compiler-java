@@ -1,0 +1,245 @@
+// if, while, e outras coisas que utilizam expressao, podem acabar recebendo expresoes invalidasmas que serao tratadas na parte semântica.
+// estava sendo tratado na parte sintática (expressaoIf, expressaoVar, etc) mas segundo a especificação, devem ser tratadas na parte semântica
+
+//var a, b = 3, c = 2 + b: int;
+//var str1, str2 = "String 2": string;
+//var i, j = true: bool;
+//var x, v[10], z[3] = {1, 5, 8}: int;
+//var palavra: string[32]; // memoria reservada para 32 caracteres.
+//var texto: string; // memoria reservada para 256 caracteres.
+//var nome = "Fulano": string; // memoria reservada para 6 caracteres.
+//var titulo = "Meu programa": string[64]; // memoria reservada para 64 caracteres.
+
+//def proc(y: int) {
+//    i = 1 + 1 < 2;
+//}
+//def func(x[], y: int; z: bool): int {
+//    i = 1 + 1 < 2;
+//}
+//def funcaoSemParametros(): string {
+//	i = 1 + 1 < 2;
+//}
+	
+//def procedimentoSemParametros() {
+//	i = 1 + 1 < 2;
+//}
+
+//def adicionar(v[]: int; n: int; x: int) {
+//    var i: int;
+//    def soma(a: int): int {
+//    	i = && ;
+//    	i += && ;
+//    	i -= && ;
+//    	i *= && ;
+//    	i /= && ;
+//    	i %= && ;
+//    }
+//    
+//    if(&&) {
+//    	i = && ;
+//    } else {
+//    	j = && ;
+//    }
+//    
+//    while(&&) {
+//    	i = && ;
+//    }
+//    
+//    for(i = 0;&&;i+=1) {
+//    	i = && ;
+//    	stop ;
+//    	skip ;
+//    }
+//	def retornoFuncao(): bool {
+//		i = 1;
+//		return 2;
+//	}
+	
+//	def retornoProcedimento() {
+//		i = "minha string";
+//		return;
+//	}
+	
+//	chamadaProcedimento(1,"tring");
+	
+//	read _mayza ;
+//	write _mayza ;
+//}
+
+//def testandoAtribuicaoExpressao() {
+//	x = i;
+//	x += funcao(x);
+//	x -= "minha string" ;
+//	x *= 199;
+//	x /= true;
+//	x %= STRING + STRING;
+//	x = 1 >= 2;
+//	x = (1+2) >= 2;
+//	x = 1 + 1 + 1;
+//	x = 1 + 1 < 2;
+//	
+//	chamadaProcedimento(1,"tring");
+//}
+
+//def testandoIfExpressao() {
+//	if(true){
+//		x = i;
+//	}
+//	
+//	if(funcao){
+//		x = i;
+//	}
+//	
+//	if(x){
+//		x = i;
+//	}
+//	
+//	if(x <= 2){
+//		x = i;
+//	}
+//	
+//	if((1 == 2) >= 3){
+//		x = i;
+//	}
+//	
+//}
+
+//def testandoWhileExpressao() {
+//	while(true){
+//		x = i;
+//	}
+//	
+//	while(funcao){
+//		x = i;
+//	}
+//	
+//	while(x){
+//		x = i;
+//	}
+//	
+//	while(x <= 2){
+//		x = i;
+//	}
+//	
+//	while((1 == 2) >= 3){
+//		x = i;
+//	}
+//	
+//}
+
+//def testandoForExpressao() {
+//	for(i=0;i<=5;i+=1) {
+//	x = i;
+//	}
+//	for(i=0;i<=x;i+=1) {
+//	x = i;
+//	}
+//	for(i=0;i<=funcao;i+=1) {
+//	x = i;
+//	}
+//	for(i=0;i<=1+1;i+=1) {
+//	x = i;
+//	}
+//	for(i=0;i<=(1+1);i+=1) {
+//	x = i;
+//	}
+//}
+
+//def retuChamadaProcEWrite() {
+//	return;
+//	return (1+2) >= 2;
+//	return 1 + 1 + 1;
+//	return 1 + 1 < 2;
+//	
+//	procedimento((1+2) >= 2, 1 + 1 + 1, 1 + 1 < 2);
+//	
+//	write "mayza", x, 1+1, 1+(2-1);
+//}
+//var nome = "Fulano": string; // memoria reservada para 6 caracteres.
+//var titulo = "Meu programa": string[64]; // memoria reservada para 64 caracteres.
+
+//def expressaoVar() {
+	//x = v[1+1];
+	//x = v[x+x];
+	//x = v[2+x];
+	//x = v[funcao];
+	
+//}
+
+//def main(): int {
+	//x = v[1+1];
+	//x = v[x+x];
+	//x = v[2+x];
+	//x = v[funcao];
+	//return 0;
+//}
+
+//def bubblesort(v[]: int; n: int) {
+  //  var i=0, j: int;
+    //var trocou = true: bool;
+
+//    while (i < n-1 && trocou) {
+  //      trocou = false;
+    //    for (j=0; j<(n-i-1); j+=1) {
+      //      if (v[j] > v[j+1]) {
+        //        var aux = v[j]: int;
+          //      v[j] = v[j+1];
+            //    v[j+1] = aux;
+              //  trocou = true;
+            //}
+        //}
+        //i += 1;
+    //}
+//}
+
+//def main(): int {
+  //  var i: int;
+
+    //write "Digite os valores do arranjo";
+
+    //for (i=0; i<10; i+=1) {
+      //  write "A\" i \" ";
+        //read v[i];
+    //}
+
+    //bubblesort(v, 10);
+
+    //write "Arranjo ordenadoA";
+
+    //for (i=0; i<10; i+=1) {
+      //  write v[i], " ";
+    //}
+
+//}
+//var x,y=2+x:int;
+//var h[1],v[5]={0,1,2,3,4}: int;
+//var m="mayza":string;
+//var n=3:int;
+//var o=n:int;
+
+//def proc(x:int;y,z:string) {
+//var j=1+1:int;
+//return;
+//}
+def proc(x,y:int;z:string){
+var a:int;
+read a;
+}
+def main(x[]:int):int{
+var k="mayza":string;
+var i:int;
+if(i<=2){
+	i=9;
+}
+while(i<=1){
+i+=1;
+}
+//for(i=0;i<=9;i+=1){
+//i-=1;
+//}
+read i;
+
+proc(1,1,"mayza");
+}
+
+

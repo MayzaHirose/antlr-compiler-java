@@ -11,6 +11,7 @@ var x, v[10], z[3] = {1, 5, 8}: int;
 
 def procedimento(x,y:int;k:bool;str,str2:string) {
 	var a = 1: int;
+	//return 0;
 }
 
 def main(x[], y: int; z: bool): int {
@@ -19,5 +20,5 @@ def main(x[], y: int; z: bool): int {
     procedimento(1,2,true,"string"); //passando tipos corretos mas faltando 1 param
     procedimento(1,2,true, "hello", "hi"); //passando td corretamente
     umaFuncaoNaoDeclarada();
-    return 0;
+    //return 0;
 }
